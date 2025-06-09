@@ -118,9 +118,8 @@ USE_L10N = True
 USE_TZ = True
 TIME_ZONE = 'UTC'
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
+LOCALE_PATHS = [ BASE_DIR / 'locale' ]   # ← carpeta donde vive “en/LC_MESSAGES”
+
 
 # ───────────── ARCHIVOS ESTÁTICOS Y MEDIA ─────────────
 STATIC_URL = '/static/'

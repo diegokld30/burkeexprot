@@ -10,7 +10,7 @@ def productos(request):
              Categoria.objects.prefetch_related('productos') }
 
     madera = cats.get('madera').productos.all() if 'madera' in cats else []
-    cafe   = cats.get('café').productos.all()   if 'café'   in cats else []
+    cafe = cats.get('cafe').productos.all() if 'cafe' in cats else []
     otros  = cats.get('otros').productos.all()  if 'otros'  in cats else []
 
     return render(request, 'core/productos.html', {

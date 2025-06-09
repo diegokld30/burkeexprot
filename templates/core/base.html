@@ -12,9 +12,9 @@
   <!-- 🎨 COLORES CENTRALIZADOS – modifica aquí -->
   <style>
     :root{
-      --brand:  #4f46e5; /* violeta principal */
-      --madera: #a65e3d;
-      --cafe:   #6f4e37;
+      --brand:  #33fff6; /* violeta principal */
+      --madera: #0284c7;
+      --cafe:   #0284c7;
       --otros:  #0284c7;
     }
   </style>
@@ -35,13 +35,14 @@
       </ul>
 
       <!-- selector de idioma -->
-      <form action="{% url 'set_language' %}" method="post">
-        {% csrf_token %}
-        <select name="language" onchange="this.form.submit()" class="border rounded p-1 text-sm">
-          <option value="es" {% if LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
-          <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
-        </select>
-      </form>
+        <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <select name="language" onchange="this.form.submit()">
+            <option value="es" {% if LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
+            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+          </select>
+        </form>
+
     </nav>
   </header>
   <div class="h-16"></div>
