@@ -1,0 +1,161 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Productos' %}{% endblock %}
+
+{% block content %}
+<!-- ░░░ HERO ░░░ -->
+<section class="relative isolate overflow-hidden text-white">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#111827] via-[#1e293b] to-[#0f172a]"></div>
+  <div class="absolute inset-0 -z-10 flex justify-center">
+    <div class="size-[900px] rounded-full bg-[var(--brand)]/30 blur-3xl"></div>
+  </div>
+
+  <div class="container mx-auto px-6 py-28 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+      Soluciones <span
+        class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand)] to-teal-400">
+        a tu medida</span>
+    </h1>
+    <p class="mx-auto max-w-2xl text-lg text-gray-300">
+      Selecciona el servicio que impulse tu marca.
+    </p>
+
+    <!-- Toggle de categorías -->
+    <div class="mt-10 inline-flex rounded-full bg-white/10 p-1 ring-1 ring-white/10 shadow-inner">
+      <button data-tab="madera"
+              class="tab-btn px-6 py-2 rounded-full text-sm font-semibold bg-white
+                     text-[var(--madera)] shadow-inner focus:outline-none">
+        Madera
+      </button>
+      <button data-tab="cafe"
+              class="tab-btn px-6 py-2 rounded-full text-sm font-semibold text-gray-300
+                     focus:outline-none">
+        Café
+      </button>
+      <button data-tab="otros"
+              class="tab-btn px-6 py-2 rounded-full text-sm font-semibold text-gray-300
+                     focus:outline-none">
+        Otros
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ SECCIÓN DE PRODUCTOS ░░░ -->
+<section class="relative overflow-hidden bg-[#030712] text-white">
+  <div class="container mx-auto px-6 pb-32">
+
+    <!-- ▲ MADERA -->
+    <div id="panel-madera" class="mt-20">
+      <div class="grid gap-8 md:grid-cols-3">
+        {% for p in madera %}
+        <article
+          class="group relative rounded-3xl p-10 shadow-md bg-gradient-to-br
+                 from-slate-800 via-slate-800/80 to-slate-800/60 transition-transform
+                 hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[var(--madera)]/40">
+          <h2 class="text-lg font-medium">{{ p.nombre }}</h2>
+          <p class="mt-1 text-sm text-gray-400">{{ p.descripcion|truncatewords:10 }}</p>
+          <img src="{{ p.imagen.url }}" alt="" class="my-6 w-full h-40 object-cover rounded-xl">
+          <button
+            class="w-full rounded-xl py-3 text-sm font-semibold text-white
+                   bg-gradient-to-r from-[var(--madera)] via-emerald-500 to-teal-500
+                   bg-[length:200%_auto] bg-left shadow-inner mt-6
+                   transition-all duration-300 hover:bg-right hover:brightness-110
+                   active:scale-95">
+            Lo quiero
+          </button>
+        </article>
+        {% empty %}
+        <p class="col-span-full text-center text-gray-500">Sin productos de madera.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ▲ CAFÉ -->
+    <div id="panel-cafe" class="hidden mt-20">
+      <div class="grid gap-8 md:grid-cols-3">
+        {% for p in cafe %}
+        <article
+          class="group relative rounded-3xl p-10 shadow-md bg-gradient-to-br
+                 from-slate-800 via-slate-800/80 to-slate-800/60 transition-transform
+                 hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[var(--cafe)]/40">
+          <h2 class="text-lg font-medium">{{ p.nombre }}</h2>
+          <p class="mt-1 text-sm text-gray-400">{{ p.descripcion|truncatewords:10 }}</p>
+          <img src="{{ p.imagen.url }}" alt="" class="my-6 w-full h-40 object-cover rounded-xl">
+          <button
+            class="w-full rounded-xl py-3 text-sm font-semibold text-white
+                   bg-gradient-to-r from-[var(--cafe)] via-amber-500 to-yellow-400
+                   bg-[length:200%_auto] bg-left shadow-inner mt-6
+                   transition-all duration-300 hover:bg-right hover:brightness-110
+                   active:scale-95">
+            Lo quiero
+          </button>
+        </article>
+        {% empty %}
+        <p class="col-span-full text-center text-gray-500">Sin productos de café.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- ▲ OTROS -->
+    <div id="panel-otros" class="hidden mt-20">
+      <div class="grid gap-8 md:grid-cols-3">
+        {% for p in otros %}
+        <article
+          class="group relative rounded-3xl p-10 shadow-md bg-gradient-to-br
+                 from-slate-800 via-slate-800/80 to-slate-800/60 transition-transform
+                 hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[var(--otros)]/40">
+          <h2 class="text-lg font-medium">{{ p.nombre }}</h2>
+          <p class="mt-1 text-sm text-gray-400">{{ p.descripcion|truncatewords:10 }}</p>
+          <img src="{{ p.imagen.url }}" alt="" class="my-6 w-full h-40 object-cover rounded-xl">
+          <button
+            class="w-full rounded-xl py-3 text-sm font-semibold text-white
+                   bg-gradient-to-r from-[var(--otros)] via-sky-500 to-cyan-400
+                   bg-[length:200%_auto] bg-left shadow-inner mt-6
+                   transition-all duration-300 hover:bg-right hover:brightness-110
+                   active:scale-95">
+            Lo quiero
+          </button>
+        </article>
+        {% empty %}
+        <p class="col-span-full text-center text-gray-500">Sin otros productos.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░░ CTA ░░░ -->
+<section class="bg-[var(--brand)] text-white py-16 text-center">
+  <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Listo para despegar?</h2>
+  <p class="mb-8 text-gray-100">En menos de 24 h tendrás tu propuesta personalizada.</p>
+  <a href="{% url 'contacto' %}"
+     class="inline-block rounded-xl bg-white px-10 py-4 font-semibold text-[var(--brand)]
+            hover:opacity-90 transition">Solicitar propuesta</a>
+</section>
+
+<!-- ░░░ JS Tabs ░░░ -->
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const panels  = { madera: '#panel-madera', cafe: '#panel-cafe', otros: '#panel-otros' };
+
+  buttons.forEach(btn => btn.addEventListener('click', e => {
+    /* resalta el botón activo */
+    buttons.forEach(b => {
+      b.classList.toggle('bg-white', b === btn);
+      b.classList.toggle('text-[var(--madera)]', b.dataset.tab === 'madera' && b === btn);
+      b.classList.toggle('text-[var(--cafe)]',   b.dataset.tab === 'cafe'   && b === btn);
+      b.classList.toggle('text-[var(--otros)]',  b.dataset.tab === 'otros'  && b === btn);
+      b.classList.toggle('text-gray-300', b !== btn);
+    });
+
+    /* cambia el panel visible */
+    Object.entries(panels).forEach(([key, sel]) => {
+      document.querySelector(sel).classList.toggle('hidden', key !== btn.dataset.tab);
+    });
+  }));
+</script>
+{% endblock %}
+

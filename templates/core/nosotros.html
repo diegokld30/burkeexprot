@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Nosotros' %}{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-16">
+  <h1 class="text-3xl font-bold mb-6">{% trans "Quiénes somos" %}</h1>
+  <p class="max-w-3xl text-gray-600">
+    {% trans "Somos una empresa dedicada a exportar productos colombianos de alta calidad como madera y café..." %}
+  </p>
+</section>
+{% endblock %}

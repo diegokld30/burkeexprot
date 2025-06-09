@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block title %}BurkeExport{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-16 text-center">
+  <h1 class="text-4xl font-extrabold mb-6">{% trans "Bienvenido a BurkeExport" %}</h1>
+  <p class="max-w-xl mx-auto text-gray-600">{% trans "Exportamos calidad colombiana al mundo." %}</p>
+
+  <!-- Últimas entradas del blog -->
+  <h2 class="text-2xl font-semibold mt-12 mb-4">{% trans "Últimas noticias" %}</h2>
+  <div class="grid gap-6 md:grid-cols-3">
+    {% for p in ultimas %}
+      <article class="bg-white rounded-xl shadow hover:shadow-lg transition">
+        <a href="{% url 'blog_detalle' p.pk %}">
+          <img src="{{ p.imagen.url }}" class="w-full h-40 object-cover rounded-t-xl" alt="">
+        </a>
+        <div class="p-4">
+          <h3 class="font-bold">{{ p.titulo }}</h3>
+          <p class="text-sm text-gray-500">{{ p.fecha }}</p>
+        </div>
+      </article>
+    {% empty %}
+      <p class="col-span-3 text-gray-500">{% trans "Aún no hay publicaciones." %}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

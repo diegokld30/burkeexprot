@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Contacto' %}{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-16">
+  <h1 class="text-3xl font-bold mb-6">{% trans "Contáctanos" %}</h1>
+  <p class="mb-8 text-gray-600">{% trans "Escríbenos a" %} <a href="mailto:info@burkeexport.com" class="text-indigo-600">info@burkeexport.com</a></p>
+</section>
+{% endblock %}

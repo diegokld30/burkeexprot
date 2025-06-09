@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Blog' %}{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-12">
+  <h1 class="text-3xl font-bold mb-8">{% trans 'Blog' %}</h1>
+
+  <div class="grid gap-8 md:grid-cols-2">
+    {% for p in posts %}
+      <article class="flex gap-4 bg-white rounded-xl shadow hover:shadow-lg transition">
+        <img src="{{ p.imagen.url }}" class="w-40 h-28 object-cover rounded-l-xl" alt="">
+        <div class="py-4 pr-4">
+          <h3 class="font-semibold"><a href="{% url 'blog_detalle' p.pk %}">{{ p.titulo }}</a></h3>
+          <p class="text-sm text-gray-500">{{ p.fecha }}</p>
+        </div>
+      </article>
+    {% empty %}
+      <p class="text-gray-500">{% trans "No hay entradas publicadas." %}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

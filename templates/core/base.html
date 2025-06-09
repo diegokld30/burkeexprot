@@ -1,0 +1,83 @@
+{% load static i18n %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}BurkeExport{% endblock %}</title>
+
+  <!-- Tailwind v4 CDN + plugins (forms + typography) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4?plugins=forms,typography"></script>
+
+  <!-- 🎨 COLORES CENTRALIZADOS – modifica aquí -->
+  <style>
+    :root{
+      --brand:  #4f46e5; /* violeta principal */
+      --madera: #a65e3d;
+      --cafe:   #6f4e37;
+      --otros:  #0284c7;
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased bg-gray-50 text-gray-800">
+
+  <!-- ╭──────────────── NAVBAR ───────────────╮ -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur shadow">
+    <nav class="container mx-auto flex items-center justify-between py-4 px-6">
+      <a href="{% url 'index' %}" class="text-2xl font-bold text-[var(--brand)]">BurkeExport</a>
+
+      <ul class="hidden md:flex gap-6 text-sm font-medium">
+        <li><a href="{% url 'productos' %}" class="hover:text-[var(--brand)]">{% trans 'Productos' %}</a></li>
+        <li><a href="{% url 'nosotros'  %}" class="hover:text-[var(--brand)]">{% trans 'Nosotros'  %}</a></li>
+        <li><a href="{% url 'contacto'  %}" class="hover:text-[var(--brand)]">{% trans 'Contacto'  %}</a></li>
+        <li><a href="{% url 'blog_lista' %}" class="hover:text-[var(--brand)]">{% trans 'Blog' %}</a></li>
+      </ul>
+
+      <!-- selector de idioma -->
+      <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <select name="language" onchange="this.form.submit()" class="border rounded p-1 text-sm">
+          <option value="es" {% if LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
+          <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+        </select>
+      </form>
+    </nav>
+  </header>
+  <div class="h-16"></div>
+  <!-- ╰────────────────────────────────────────╯ -->
+
+  {% block content %}{% endblock %}
+
+  <!-- ╭──────────────── BOTÓN WHATSAPP ─────────╮ -->
+  <a href="https://wa.me/573123397154" target="_blank"
+     class="fixed bottom-6 right-6 group size-16 rounded-full grid place-content-center shadow-2xl
+            bg-[var(--brand)] transition-transform hover:scale-110">
+    <svg class="size-7 text-white group-hover:animate-ping-slow" viewBox="0 0 32 32" fill="currentColor">
+      <path d="M.06 32 2 26a15 15 0 1 1 5 5Z"/>
+    </svg>
+  </a>
+  <style>
+    @keyframes ping-slow {0%{opacity:1} 75%,100%{opacity:0}}
+    .group:hover .group-hover\:animate-ping-slow{
+      animation: ping-slow 1.2s cubic-bezier(0,0,.2,1) infinite;
+    }
+  </style>
+  <!-- ╰──────────────────────────────────────────╯ -->
+
+  <!-- ╭──── COLOR PICKER (solo dev) ───╮ -->
+  <div class="fixed bottom-6 left-6 z-50 space-x-3 bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow">
+    <label class="text-sm font-medium">Brand:
+      <input id="brandPicker" type="color" value="#4f46e5" class="align-middle">
+    </label>
+  </div>
+
+  <script>
+    /* Generador de color en vivo */
+    document.getElementById('brandPicker')
+      .addEventListener('input', e =>
+        document.documentElement.style.setProperty('--brand', e.target.value));
+  </script>
+  <!-- ╰──────────────────────────────────╯ -->
+</body>
+</html>

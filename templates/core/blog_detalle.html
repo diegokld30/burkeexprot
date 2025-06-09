@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% block title %}{{ post.titulo }}{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-12">
+  <article class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-4">{{ post.titulo }}</h1>
+    <p class="text-sm text-gray-500 mb-6">{{ post.fecha }}</p>
+    <img src="{{ post.imagen.url }}" class="rounded-xl mb-6 w-full" alt="">
+    <div class="prose max-w-none">
+      {{ post.contenido|safe }}
+    </div>
+  </article>
+</section>
+{% endblock %}
