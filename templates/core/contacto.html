@@ -1,10 +1,136 @@
-{% extends 'core/base.html' %}
-{% load i18n %}
-{% block title %}{% trans 'Contacto' %}{% endblock %}
+{% extends "core/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Contacto" %}{% endblock %}
 
 {% block content %}
-<section class="container mx-auto px-6 py-16">
-  <h1 class="text-3xl font-bold mb-6">{% trans "Contáctanos" %}</h1>
-  <p class="mb-8 text-gray-600">{% trans "Escríbenos a" %} <a href="mailto:info@burkeexport.com" class="text-indigo-600">info@burkeexport.com</a></p>
+<section class="relative overflow-hidden bg-white py-24">
+  {# Fondo decorativo tipo blob #}
+  <img src="{% static 'img/blob.svg' %}"
+       alt=""
+       class="pointer-events-none absolute -top-60 -left-40 h-[800px] opacity-10 select-none" />
+
+  <div class="container mx-auto px-6">
+    <div class="mx-auto max-w-3xl text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-[var(--brand)]">
+        {% trans "Hablemos de negocios" %}
+      </h1>
+      <p class="mt-4 text-gray-700">
+        {% trans "Completa el formulario y un asesor te responderá en minutos vía WhatsApp." %}
+      </p>
+    </div>
+
+    <form id="contactForm"
+          class="mx-auto max-w-2xl rounded-3xl bg-white/60 p-8 shadow-xl ring-1 ring-black/5 backdrop-blur">
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Nombre -->
+        <div class="relative">
+          <label for="name" class="block text-sm font-semibold text-gray-700">
+            {% trans "Nombre" %}
+          </label>
+          <input id="name" name="name" type="text" required
+                 placeholder="{% trans 'Tu nombre completo' %}"
+                 class="mt-2 w-full rounded-xl border border-gray-300 bg-white/70 px-4 py-3 placeholder-gray-400 shadow
+                        focus:border-[var(--brand)] focus:ring-[var(--brand)]"/>
+          <svg xmlns="http://www.w3.org/2000/svg"
+               class="pointer-events-none absolute right-4 top-10 h-5 w-5 text-gray-400"
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-semibold text-gray-700">
+            Email
+          </label>
+          <input id="email" name="email" type="email" required
+                 placeholder="ejemplo@correo.com"
+                 class="mt-2 w-full rounded-xl border border-gray-300 bg-white/70 px-4 py-3 placeholder-gray-400 shadow
+                        focus:border-[var(--brand)] focus:ring-[var(--brand)]"/>
+        </div>
+
+        <!-- Teléfono -->
+        <div>
+          <label for="phone" class="block text-sm font-semibold text-gray-700">
+            {% trans "Teléfono" %}
+          </label>
+          <input id="phone" name="phone" type="tel" required
+                 placeholder="+57 310 000 0000"
+                 class="mt-2 w-full rounded-xl border border-gray-300 bg-white/70 px-4 py-3 placeholder-gray-400 shadow
+                        focus:border-[var(--brand)] focus:ring-[var(--brand)]"/>
+        </div>
+
+        <!-- Tipo -->
+        <div>
+          <label for="type" class="block text-sm font-semibold text-gray-700">
+            {% trans "Interés" %}
+          </label>
+          <select id="type" name="type" required
+                  class="mt-2 w-full rounded-xl border border-gray-300 bg-white/70 px-4 py-3 shadow
+                         focus:border-[var(--brand)] focus:ring-[var(--brand)]">
+            <option value="" disabled selected>{% trans "Selecciona una opción" %}</option>
+            <option>Madera</option>
+            <option>Café</option>
+            <option>Otros</option>
+            <option>{% trans "Distribuidor" %}</option>
+            <option>{% trans "Alianza B2B" %}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Mensaje -->
+      <div class="mt-6">
+        <label for="message" class="block text-sm font-semibold text-gray-700">
+          {% trans "Mensaje" %}
+        </label>
+        <textarea id="message" name="message" rows="5" required
+                  placeholder="{% trans 'Cuéntanos lo que necesitas…' %}"
+                  class="mt-2 w-full resize-y rounded-xl border border-gray-300 bg-white/70 px-4 py-3 placeholder-gray-400 shadow
+                         focus:border-[var(--brand)] focus:ring-[var(--brand)]"></textarea>
+      </div>
+
+      <!-- Botón -->
+      <button type="submit"
+              class="mt-10 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--brand)] px-10 py-3 font-semibold text-white shadow-lg
+                     transition hover:opacity-90 active:scale-[0.98]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+        {% trans "Enviar a WhatsApp" %}
+      </button>
+    </form>
+  </div>
 </section>
+
 {% endblock %}
+
+{% block extra_js %}
+<script>
+  const WHATSAPP_NUMBER = "573123397154";          // sin "+" ni espacios
+
+  document.getElementById("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const d = Object.fromEntries(new FormData(e.target));
+    const raw = `
+*Nuevo contacto BurkeExport*
+👤 *Nombre:* ${d.name}
+📧 *Email:* ${d.email}
+📱 *Teléfono:* ${d.phone}
+🏷️ *Interés:* ${d.type}
+📝 *Mensaje:* ${d.message}`.trim();
+
+    // Codifica y normaliza saltos de línea a %0A
+    const encoded = encodeURIComponent(raw).replace(/%0A/g, "%0A");
+
+    // URL oficial
+    const url = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encoded}`;
+    window.open(url, "_blank");
+  });
+</script>
+{% endblock %}
+

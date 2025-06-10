@@ -4,71 +4,91 @@
 {% block title %}BurkeExport{% endblock %}
 
 {% block content %}
-{# ░░░ HERO + FOTOS EMPRESA ░░░ ----------------------------------------- #}
-<section id="home" class="relative overflow-hidden bg-white">
-  <!-- fondo decorativo -->
+{# ░░░ HERO FRESCO ░░░ --------------------------------------------------- #}
+<section class="relative overflow-hidden bg-white pt-20 lg:pt-28">
+  {# fondo sutil #}
   <div class="absolute inset-0 -z-10 bg-grid-slate/5 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
-  <div class="absolute -top-72 -left-40 -z-20 size-[900px] rounded-full bg-[var(--brand)]/20 blur-3xl"></div>
 
-  <div class="container mx-auto px-6 py-24 lg:py-32 grid gap-16 lg:grid-cols-2">
-    <!-- Texto principal -->
-    <div>
-      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900">
-        {% trans "Revolucionamos la" %}<br>
-        <span class="text-[var(--brand)]">{% trans "forma de conectar" %}</span>
+  <div class="container mx-auto flex flex-col-reverse items-center gap-14 px-6 pb-24 lg:flex-row lg:gap-10 lg:pb-32">
+    <!-- ───── Left (copy) ───── -->
+    <div class="relative w-full max-w-xl">
+      {# puntos de navegación #}
+      <div class="absolute -left-12 top-6 hidden flex-col gap-4 lg:flex">
+        <span class="h-3 w-3 rounded-full bg-[var(--brand)]"></span>
+        <span class="h-3 w-3 rounded-full bg-[var(--brand)]/50"></span>
+        <span class="h-3 w-3 rounded-full bg-[var(--brand)]/30"></span>
+      </div>
+
+      <h1 class="text-4xl font-extrabold text-[var(--brand)] sm:text-5xl lg:text-6xl">
+        {% trans "BurkeExport: calidad colombiana al mundo" %}
       </h1>
-      <p class="mt-6 max-w-lg text-lg text-gray-600">
-        {% trans "Exportamos calidad colombiana al mundo, combinando logística, innovación y un servicio cercano." %}
+      <p class="mt-6 text-lg text-gray-700 leading-relaxed max-w-prose">
+        {% trans "Somos la marca #1 en exportación de madera, café y productos selectos 'otros'. Conectamos a productores locales con clientes globales mediante logística de alta eficiencia y un compromiso inquebrantable con la sostenibilidad." %}
       </p>
-      <div class="mt-8 flex gap-4">
-        <a href="{% url 'productos' %}"
-           class="rounded-xl bg-[var(--brand)] px-8 py-3 text-white font-semibold hover:opacity-90 transition">
-          {% trans "Ver productos" %}
+
+      <div class="mt-10 flex gap-4">
+        <a
+          href="{% url 'productos' %}"
+          class="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-8 py-3 font-semibold text-white shadow hover:opacity-90 active:scale-95"
+        >
+          {% trans "Ver&nbsp;productos" %}
         </a>
-        <a href="{% url 'contacto' %}"
-           class="rounded-xl border border-gray-300 px-8 py-3 font-semibold text-gray-700 hover:bg-gray-100 transition">
+        <a
+          href="{% url 'contacto' %}"
+          class="inline-flex items-center gap-2 rounded-full border border-[var(--brand)]/40 px-8 py-3 font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10 active:scale-95"
+        >
           {% trans "Contáctanos" %}
         </a>
       </div>
     </div>
 
-    <!-- Mosaico corporativo (4 fotos) -->
-    <div class="grid grid-cols-2 gap-4 self-center">
-      <img src="{% static 'img/17fba63c-5294-4c83-a15d-cdc51b426a72.JPG' %}" alt="{% trans 'Producto madera' %}"
-           class="h-48 w-full rounded-2xl object-cover shadow-lg" loading="lazy">
-      <img src="{% static 'img/pruba1.png' %}" alt="{% trans 'Equipo de trabajo' %}"
-           class="h-72 w-full rounded-2xl object-cover shadow-lg" loading="lazy">
-      <img src="{% static 'img/379425CB-003E-4E91-97E2-A1F3E8095500.JPG' %}" alt="{% trans 'Proceso de empaque' %}"
-           class="h-72 w-full rounded-2xl object-cover shadow-lg" loading="lazy">
-      <!--<img src="{% static 'img/empresa/foto4.jpg' %}" alt="{% trans 'Exportación' %}"
-           class="h-48 w-full rounded-2xl object-cover shadow-lg" loading="lazy">-->
+    <!-- ───── Right (imagen circular) ───── -->
+    <div class="relative w-full flex justify-center lg:flex-1">
+      <div class="relative size-60 sm:size-72 md:size-80">
+        <div class="absolute inset-0 rounded-full bg-[var(--brand)]/10"></div>
+        <img
+          src="{% static 'img/planta.png' %}"
+          alt="{% trans 'Productos sostenibles' %}"
+          class="relative z-10 size-full rounded-full object-cover ring-4 ring-white shadow-xl"
+          loading="eager"
+        />
+      </div>
     </div>
   </div>
 </section>
 
-{# ░░░ MINI-FEATURES ░░░ -------------------------------------------------- #}
+{# ░░░ VENTAJAS CLAVE ░░░ ------------------------------------------------ #}
 <section class="container mx-auto px-6 py-20">
-  <h2 class="text-center text-3xl md:text-4xl font-bold mb-12">
-    {% trans "¿Por qué elegirnos?" %}
+  <h2 class="text-center text-3xl md:text-4xl font-bold mb-14">
+    {% trans "¿Por qué elegir BurkeExport?" %}
   </h2>
-  <div class="grid gap-10 md:grid-cols-3">
+
+  <div class="grid gap-12 md:grid-cols-3">
     <div class="text-center space-y-4">
-      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 2"/></svg>
+      <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 2"/>
+        </svg>
       </div>
       <h3 class="text-xl font-semibold">{% trans "Calidad garantizada" %}</h3>
       <p class="text-sm text-gray-600">{% trans "Certificaciones internacionales y trazabilidad completa." %}</p>
     </div>
+
     <div class="text-center space-y-4">
-      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6a9 9 0 110 12A9 9 0 0112 6z"/></svg>
+      <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-amber-500/10 text-amber-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6a9 9 0 110 12A9 9 0 0112 6z"/>
+        </svg>
       </div>
       <h3 class="text-xl font-semibold">{% trans "Logística global" %}</h3>
       <p class="text-sm text-gray-600">{% trans "Entregas puerta a puerta en los cinco continentes." %}</p>
     </div>
+
     <div class="text-center space-y-4">
-      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12l-4 4-4-4"/></svg>
+      <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-cyan-500/10 text-cyan-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12l-4 4-4-4"/>
+        </svg>
       </div>
       <h3 class="text-xl font-semibold">{% trans "Escalabilidad" %}</h3>
       <p class="text-sm text-gray-600">{% trans "Capacidad para crecer junto a tus pedidos." %}</p>
@@ -76,7 +96,40 @@
   </div>
 </section>
 
-    {# ░░░ NOTICIA RECIENTE ░░░ --------------------------------------------- #}
+{# ░░░ CATEGORÍAS DESTACADAS ░░░ ---------------------------------------- #}
+<section class="container mx-auto px-6 pb-24">
+  <h2 class="text-center text-3xl md:text-4xl font-bold mb-14">
+    {% trans "Nuestras líneas de exportación" %}
+  </h2>
+
+  <div class="grid gap-8 md:grid-cols-3">
+    <!-- Madera -->
+    <a href="{% url 'productos' %}#panel-madera"
+       class="group relative overflow-hidden rounded-3xl bg-white shadow hover:shadow-xl transition">
+      <img src="{% static 'img/categoria-madera.jpg' %}" alt="Madera" class="h-64 w-full object-cover group-hover:scale-105 transition">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+      <span class="absolute bottom-4 left-4 text-2xl font-bold text-white drop-shadow">{% trans "Madera" %}</span>
+    </a>
+
+    <!-- Café -->
+    <a href="{% url 'productos' %}#panel-cafe"
+       class="group relative overflow-hidden rounded-3xl bg-white shadow hover:shadow-xl transition">
+      <img src="{% static 'img/cafe.png' %}" alt="Café" class="h-64 w-full object-cover group-hover:scale-105 transition">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+      <span class="absolute bottom-4 left-4 text-2xl font-bold text-white drop-shadow">{% trans "Café" %}</span>
+    </a>
+
+    <!-- Otros -->
+    <a href="{% url 'productos' %}#panel-otros"
+       class="group relative overflow-hidden rounded-3xl bg-white shadow hover:shadow-xl transition">
+      <img src="{% static 'img/categoria-otros.jpg' %}" alt="Otros" class="h-64 w-full object-cover group-hover:scale-105 transition">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+      <span class="absolute bottom-4 left-4 text-2xl font-bold text-white drop-shadow">{% trans "Otros" %}</span>
+    </a>
+  </div>
+</section>
+
+{# ░░░ ÚLTIMA NOTICIA (sin cambios lógicos) ░░░ --------------------------- #}
 <section class="container mx-auto px-6 py-20 text-center">
   <h2 class="text-3xl font-bold mb-8">{% trans "Última noticia" %}</h2>
   {% if ultima %}
@@ -94,22 +147,21 @@
   {% endif %}
 </section>
 
-{# ░░░ CTA CLARO ░░░ ----------------------------------------------------- #}
+{# ░░░ CTA FINAL ░░░ ------------------------------------------------------ #}
 <section class="relative overflow-hidden bg-[var(--brand)] py-20 text-white">
   <div class="absolute inset-0 -z-10 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:36px_36px]"></div>
 
   <div class="container mx-auto px-6 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4">{% trans "¿Listo para llevar tu producto al mundo?" %}</h2>
-    <p class="mx-auto max-w-2xl mb-8 text-gray-200">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+      {% trans "¿Listo para llevar tu producto al mundo?" %}
+    </h2>
+    <p class="mx-auto max-w-2xl mb-8 text-gray-100">
       {% trans "Agenda una llamada de 15&nbsp;minutos con nuestro equipo y descubre cómo podemos ayudarte." %}
     </p>
     <a href="{% url 'contacto' %}"
-       class="inline-block rounded-xl bg-white px-10 py-4 font-semibold text-[var(--brand)] hover:opacity-90 transition">
+       class="inline-block rounded-full bg-white px-10 py-4 font-semibold text-[var(--brand)] shadow hover:opacity-90 transition">
       {% trans "Agenda ahora" %}
     </a>
-
   </div>
 </section>
-
-
 {% endblock %}

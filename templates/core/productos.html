@@ -1,162 +1,190 @@
-{% extends 'core/base.html' %}
-{% load i18n %}
+{% extends "core/base.html" %}
+{% load i18n static %}
 
-{% block title %}{% trans 'Productos' %}{% endblock %}
+{% block title %}{% trans "Productos" %}{% endblock %}
 
 {% block content %}
-<!-- ░░░ HERO ░░░ -->
-<section class="relative isolate overflow-hidden text-white">
-  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#34352d] via-[#1e293b] to-[#34352d]"></div>
-  <div class="absolute inset-0 -z-10 flex justify-center">
-    <div class="size-[900px] rounded-full bg-[var(--brand)]/30 blur-3xl"></div>
+{# ░░░ HERO COMPACTO ░░░ -------------------------------------------------- #}
+<section class="relative overflow-hidden bg-white pt-20 lg:pt-28">
+  <div class="absolute inset-0 -z-10 bg-grid-slate/5 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
+
+  <div class="container mx-auto flex flex-col items-center gap-10 px-6 pb-24 lg:flex-row lg:gap-16 lg:pb-32">
+    <!-- Texto -->
+    <div class="w-full max-w-xl text-center lg:text-left">
+      <h1 class="text-4xl font-extrabold text-[var(--brand)] sm:text-5xl lg:text-6xl">
+        {% trans "Descubre nuestra colección" %}
+      </h1>
+      <p class="mt-6 text-lg text-gray-700 leading-relaxed">
+        {% trans "Somos la marca #1 en exportación de madera, café y artículos de calidad superior. Elige el producto ideal y potencia tu negocio con BurkeExport." %}
+      </p>
+
+      <!-- Tabs -->
+      <div class="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start">
+        <button data-tab="madera"
+          class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow backdrop-blur transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-teal-500">
+          Madera
+        </button>
+        <button data-tab="cafe"
+          class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow backdrop-blur transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-amber-500">
+          Café
+        </button>
+        <button data-tab="otros"
+          class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow backdrop-blur transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-cyan-500">
+          Otros
+        </button>
+      </div>
+    </div>
+
+    <!-- Imagen hero (circular) -->
+    <div class="relative w-full flex justify-center lg:flex-1">
+      <div class="relative size-60 sm:size-72 md:size-80">
+        <div class="absolute inset-0 rounded-full bg-[var(--brand)]/10"></div>
+        <img src="{% static 'img/banner-productos.png' %}"
+             alt="{% trans 'Colección de productos' %}"
+             class="relative z-10 size-full rounded-full object-cover ring-4 ring-white shadow-xl"
+             loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ░░░ LISTADOS ░░░ ------------------------------------------------------- #}
+<section class="container mx-auto px-6 pb-24">
+  <!-- MADERA -->
+  <div id="panel-madera" class="flex flex-wrap justify-center gap-10">
+    {% for p in madera %}
+      <article
+        class="group relative w-full max-w-[280px] overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
+        <span
+          class="absolute right-4 top-4 inline-block rounded-full bg-teal-600 px-3 py-1 text-xs font-semibold text-white shadow">
+          Madera
+        </span>
+
+        <div class="aspect-square overflow-hidden">
+          <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
+               class="h-full w-full object-cover transition duration-300 group-hover:scale-110">
+        </div>
+
+        <div class="p-6">
+          <h2 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h2>
+          <p class="mt-2 line-clamp-3 text-sm text-gray-600">{{ p.descripcion }}</p>
+
+          <button
+            class="mt-6 flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 px-5 py-2 text-sm font-medium text-white shadow hover:from-emerald-500 hover:to-teal-500 active:scale-95">
+            {% trans "Lo quiero" %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </button>
+        </div>
+      </article>
+    {% empty %}
+      <p class="w-full text-center text-gray-500">{% trans "No hay productos de madera." %}</p>
+    {% endfor %}
   </div>
 
-  <div class="container mx-auto px-6 py-28 text-center">
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
-      Soluciones <span
-        class="bg-clip-text text-transparent bg-gradient-to-r from-[var(--brand)] to-teal-400">
-        a tu medida</span>
-    </h1>
-    <p class="mx-auto max-w-2xl text-lg text-gray-300">
-      Selecciona el servicio que impulse tus proyectos.
+  <!-- CAFÉ -->
+  <div id="panel-cafe" class="hidden flex flex-wrap justify-center gap-10">
+    {% for p in cafe %}
+      <article
+        class="group relative w-full max-w-[280px] overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
+        <span
+          class="absolute right-4 top-4 inline-block rounded-full bg-amber-600 px-3 py-1 text-xs font-semibold text-white shadow">
+          Café
+        </span>
+
+        <div class="aspect-square overflow-hidden">
+          <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
+               class="h-full w-full object-cover transition duration-300 group-hover:scale-110">
+        </div>
+
+        <div class="p-6">
+          <h2 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h2>
+          <p class="mt-2 line-clamp-3 text-sm text-gray-600">{{ p.descripcion }}</p>
+
+          <button
+            class="mt-6 flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 px-5 py-2 text-sm font-medium text-white shadow hover:from-yellow-400 hover:to-amber-500 active:scale-95">
+            {% trans "Lo quiero" %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </button>
+        </div>
+      </article>
+    {% empty %}
+      <p class="w-full text-center text-gray-500">{% trans "No hay productos de café." %}</p>
+    {% endfor %}
+  </div>
+
+  <!-- OTROS -->
+  <div id="panel-otros" class="hidden flex flex-wrap justify-center gap-10">
+    {% for p in otros %}
+      <article
+        class="group relative w-full max-w-[280px] overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
+        <span
+          class="absolute right-4 top-4 inline-block rounded-full bg-cyan-600 px-3 py-1 text-xs font-semibold text-white shadow">
+          Otros
+        </span>
+
+        <div class="aspect-square overflow-hidden">
+          <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
+               class="h-full w-full object-cover transition duration-300 group-hover:scale-110">
+        </div>
+
+        <div class="p-6">
+          <h2 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h2>
+          <p class="mt-2 line-clamp-3 text-sm text-gray-600">{{ p.descripcion }}</p>
+
+          <button
+            class="mt-6 flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-5 py-2 text-sm font-medium text-white shadow hover:from-sky-500 hover:to-cyan-500 active:scale-95">
+            {% trans "Lo quiero" %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </button>
+        </div>
+      </article>
+    {% empty %}
+      <p class="w-full text-center text-gray-500">{% trans "No hay otros productos." %}</p>
+    {% endfor %}
+  </div>
+</section>
+
+{# ░░░ CTA FINAL ░░░ ------------------------------------------------------ #}
+<section class="relative overflow-hidden bg-[var(--brand)] py-20 text-white">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:36px_36px]"></div>
+
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">{% trans "¿Listo para comenzar?" %}</h2>
+    <p class="mx-auto max-w-2xl mb-8 text-gray-100">
+      {% trans "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas." %}
     </p>
-
-    <!-- Toggle de categorías -->
-    <div class="mt-10 inline-flex rounded-full bg-white/10 p-1 ring-1 ring-white/10 shadow-inner">
-      <button data-tab="madera"
-              class="tab-btn px-6 py-2 rounded-full text-sm font-semibold bg-white
-                     text-[var(--madera)] shadow-inner focus:outline-none">
-        Madera
-      </button>
-      <button data-tab="cafe"
-              class="tab-btn px-6 py-2 rounded-full text-sm font-semibold text-gray-300
-                     focus:outline-none">
-        Café
-      </button>
-      <button data-tab="otros"
-              class="tab-btn px-6 py-2 rounded-full text-sm font-semibold text-gray-300
-                     focus:outline-none">
-        Otros
-      </button>
-    </div>
+    <a href="{% url 'contacto' %}"
+       class="inline-block rounded-full bg-white px-10 py-4 font-semibold text-[var(--brand)] shadow hover:opacity-90 transition">
+      {% trans "Solicitar propuesta" %}
+    </a>
   </div>
 </section>
 
-<!-- ░░░ SECCIÓN DE PRODUCTOS ░░░ -->
-    <!--color de fondo de los productos-->
-<section class="relative overflow-hidden bg-[#030712] text-white">
-  <div class="container mx-auto px-6 pb-32">
-
-    <!-- ▲ MADERA -->
-    <div id="panel-madera" class="mt-20">
-      <div class="grid gap-8 md:grid-cols-3">
-        {% for p in madera %}
-        <article
-          class="group relative rounded-3xl p-10 shadow-md bg-gradient-to-br
-                 from-slate-800 via-slate-800/80 to-slate-800/60 transition-transform
-                 hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[var(--madera)]/40">
-          <h2 class="text-lg font-medium">{{ p.nombre }}</h2>
-          <p class="mt-1 text-sm text-gray-400">{{ p.descripcion|truncatewords:10 }}</p>
-          <img src="{{ p.imagen.url }}" alt="" class="my-6 w-full h-40 object-cover rounded-xl">
-          <button
-            class="w-full rounded-xl py-3 text-sm font-semibold text-white
-                   bg-gradient-to-r from-[var(--madera)] via-emerald-500 to-teal-500
-                   bg-[length:200%_auto] bg-left shadow-inner mt-6
-                   transition-all duration-300 hover:bg-right hover:brightness-110
-                   active:scale-95">
-            Lo quiero
-          </button>
-        </article>
-        {% empty %}
-        <p class="col-span-full text-center text-gray-500">Sin productos de madera.</p>
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- ▲ CAFÉ -->
-    <div id="panel-cafe" class="hidden mt-20">
-      <div class="grid gap-8 md:grid-cols-3">
-        {% for p in cafe %}
-        <article
-          class="group relative rounded-3xl p-10 shadow-md bg-gradient-to-br
-                 from-slate-800 via-slate-800/80 to-slate-800/60 transition-transform
-                 hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[var(--cafe)]/40">
-          <h2 class="text-lg font-medium">{{ p.nombre }}</h2>
-          <p class="mt-1 text-sm text-gray-400">{{ p.descripcion|truncatewords:10 }}</p>
-          <img src="{{ p.imagen.url }}" alt="" class="my-6 w-full h-40 object-cover rounded-xl">
-          <button
-            class="w-full rounded-xl py-3 text-sm font-semibold text-white
-                   bg-gradient-to-r from-[var(--cafe)] via-amber-500 to-yellow-400
-                   bg-[length:200%_auto] bg-left shadow-inner mt-6
-                   transition-all duration-300 hover:bg-right hover:brightness-110
-                   active:scale-95">
-            Lo quiero
-          </button>
-        </article>
-        {% empty %}
-        <p class="col-span-full text-center text-gray-500">Sin productos de café.</p>
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- ▲ OTROS -->
-    <div id="panel-otros" class="hidden mt-20">
-      <div class="grid gap-8 md:grid-cols-3">
-        {% for p in otros %}
-        <article
-          class="group relative rounded-3xl p-10 shadow-md bg-gradient-to-br
-                 from-slate-800 via-slate-800/80 to-slate-800/60 transition-transform
-                 hover:-translate-y-4 hover:shadow-2xl hover:ring-2 hover:ring-[var(--otros)]/40">
-          <h2 class="text-lg font-medium">{{ p.nombre }}</h2>
-          <p class="mt-1 text-sm text-gray-400">{{ p.descripcion|truncatewords:10 }}</p>
-          <img src="{{ p.imagen.url }}" alt="" class="my-6 w-full h-40 object-cover rounded-xl">
-          <button
-            class="w-full rounded-xl py-3 text-sm font-semibold text-white
-                   bg-gradient-to-r from-[var(--otros)] via-sky-500 to-cyan-400
-                   bg-[length:200%_auto] bg-left shadow-inner mt-6
-                   transition-all duration-300 hover:bg-right hover:brightness-110
-                   active:scale-95">
-            Lo quiero
-          </button>
-        </article>
-        {% empty %}
-        <p class="col-span-full text-center text-gray-500">Sin otros productos.</p>
-        {% endfor %}
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ░░░ CTA ░░░ -->
-<section class="bg-[var(--brand)] text-white py-16 text-center">
-  <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Listo para despegar?</h2>
-  <p class="mb-8 text-gray-100">En menos de 24 h tendrás tu propuesta personalizada.</p>
-  <a href="{% url 'contacto' %}"
-     class="inline-block rounded-xl bg-white px-10 py-4 font-semibold text-[var(--brand)]
-            hover:opacity-90 transition">Solicitar propuesta</a>
-</section>
-
-<!-- ░░░ JS Tabs ░░░ -->
+{# ░░░ SCRIPTS TABS ░░░ --------------------------------------------------- #}
 <script>
-  const buttons = document.querySelectorAll('.tab-btn');
-  const panels  = { madera: '#panel-madera', cafe: '#panel-cafe', otros: '#panel-otros' };
+  const tabs   = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('[id^="panel-"]');
 
-  buttons.forEach(btn => btn.addEventListener('click', e => {
-    /* resalta el botón activo */
-    buttons.forEach(b => {
-      b.classList.toggle('bg-white', b === btn);
-      b.classList.toggle('text-[var(--madera)]', b.dataset.tab === 'madera' && b === btn);
-      b.classList.toggle('text-[var(--cafe)]',   b.dataset.tab === 'cafe'   && b === btn);
-      b.classList.toggle('text-[var(--otros)]',  b.dataset.tab === 'otros'  && b === btn);
-      b.classList.toggle('text-gray-300', b !== btn);
-    });
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('ring', 'ring-offset-2'));
+      tab.classList.add('ring', 'ring-offset-2');
 
-    /* cambia el panel visible */
-    Object.entries(panels).forEach(([key, sel]) => {
-      document.querySelector(sel).classList.toggle('hidden', key !== btn.dataset.tab);
+      const target = tab.dataset.tab;
+      panels.forEach(p => p.classList.toggle('hidden', p.id !== `panel-${target}`));
     });
-  }));
+  });
 </script>
 {% endblock %}
-

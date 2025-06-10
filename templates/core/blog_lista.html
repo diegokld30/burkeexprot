@@ -1,25 +1,101 @@
-{% extends 'core/base.html' %}
-{% load i18n %}
-{% block title %}{% trans 'Blog' %}{% endblock %}
+{% extends "core/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Blog" %}{% endblock %}
 
 {% block content %}
-<section class="container mx-auto px-6 py-12">
-  <h1 class="text-3xl font-bold mb-8">{% trans 'Blog' %}</h1>
+{# ░░░ HERO – última entrada destacada ░░░ --------------------------------- #}
+{% with posts|first as featured %}
+  {% if featured %}
+    <section class="relative isolate overflow-hidden">
+      <img
+        src="{{ featured.imagen.url }}"
+        alt="{{ featured.titulo }}"
+        class="absolute inset-0 h-full w-full object-cover object-center"
+      >
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/60"></div>
 
-  <div class="grid gap-8 md:grid-cols-2">
-    {% for p in posts %}
-      <article class="bg-white rounded-xl shadow hover:shadow-lg transition">
-        <a href="{% url 'blog_detalle' p.pk %}">
-          <img src="{{ p.imagen.url }}" class="w-full h-40 object-cover rounded-t-xl" alt="">
+      <div class="container relative z-10 mx-auto px-6 py-24 text-center text-white md:py-32">
+        <h1 class="max-w-3xl mx-auto text-4xl font-extrabold md:text-5xl lg:text-6xl leading-tight">
+          {{ featured.titulo }}
+        </h1>
+        <p class="mt-6 max-w-2xl mx-auto text-lg text-white/80 line-clamp-3">
+          {{ featured.extracto|default:featured.contenido|striptags|truncatewords:30 }}
+        </p>
+        <a
+          href="{% url 'blog_detalle' featured.pk %}"
+          class="mt-10 inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-10 py-3 font-semibold text-white shadow hover:opacity-90 active:scale-95"
+        >
+          {% trans "Leer más" %}
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
         </a>
-        <div class="p-4">
-          <h3 class="font-bold">{{ p.titulo }}</h3>
-          <p class="text-sm text-gray-500">{{ p.fecha }}</p>
-        </div>
-      </article>
-    {% empty %}
-      <p class="text-gray-500">{% trans "No hay entradas publicadas." %}</p>
-    {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+{% endwith %}
+
+{# GRID DE ARTÍCULOS ---------------------------------------------------- #}
+<section class="container mx-auto px-6 py-24">
+  <h2 class="text-center text-3xl md:text-4xl font-bold mb-14">
+    {% trans "Noticias recientes" %}
+  </h2>
+
+  {% if posts %}
+    {# posts|slice:"1:" → omite la primera (featured) #}
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+      {% for p in posts|slice:"1:" %}
+        <article
+          class="group relative overflow-hidden rounded-3xl bg-white shadow ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg"
+        >
+          <a href="{% url 'blog_detalle' p.pk %}" class="block">
+            <div class="aspect-video overflow-hidden">
+              <img src="{{ p.imagen.url }}"
+                   alt="{{ p.titulo }}"
+                   class="h-full w-full object-cover transition duration-300 group-hover:scale-105">
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="text-lg font-semibold text-gray-800 group-hover:text-[var(--brand)] transition">
+                {{ p.titulo }}
+              </h3>
+              <p class="text-sm text-gray-500">{{ p.fecha|date:"DATE_FORMAT" }}</p>
+              <p class="line-clamp-2 text-sm text-gray-600">
+                {{ p.extracto|default:p.contenido|striptags|truncatewords:18 }}
+              </p>
+            </div>
+          </a>
+        </article>
+      {% empty %}
+        <p class="col-span-full text-center text-gray-500">
+          {% trans "No hay entradas publicadas." %}
+        </p>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-gray-500">
+      {% trans "No hay entradas publicadas." %}
+    </p>
+  {% endif %}
+</section>
+
+
+{# ░░░ CTA FINAL ░░░ ------------------------------------------------------ #}
+<section class="relative overflow-hidden bg-[var(--brand)] py-20 text-white">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:36px_36px]"></div>
+
+  <div class="container mx-auto px-6 text-center">
+    <h3 class="text-3xl md:text-4xl font-bold mb-4">
+      {% trans "¿Quieres saber más sobre nuestros proyectos de exportación?" %}
+    </h3>
+    <p class="mx-auto max-w-2xl mb-8 text-gray-100">
+      {% trans "Contáctanos y descubre cómo BurkeExport puede impulsar tu negocio." %}
+    </p>
+    <a href="{% url 'contacto' %}"
+       class="inline-block rounded-full bg-white px-10 py-4 font-semibold text-[var(--brand)] shadow hover:opacity-90 transition">
+      {% trans "Habla con un asesor" %}
+    </a>
   </div>
 </section>
 {% endblock %}
