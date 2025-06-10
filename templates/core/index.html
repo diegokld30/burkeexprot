@@ -1,29 +1,114 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}BurkeExport{% endblock %}
 
 {% block content %}
-<section class="container mx-auto px-6 py-16 text-center">
-  <h1 class="text-4xl font-extrabold mb-6">{% trans "Bienvenido a BurkeExport" %}</h1>
-  <p class="max-w-xl mx-auto text-gray-600">{% trans "Exportamos calidad colombiana al mundo." %}</p>
+{# ░░░ HERO + FOTOS EMPRESA ░░░ ----------------------------------------- #}
+<section id="home" class="relative overflow-hidden bg-white">
+  <!-- fondo decorativo -->
+  <div class="absolute inset-0 -z-10 bg-grid-slate/5 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
+  <div class="absolute -top-72 -left-40 -z-20 size-[900px] rounded-full bg-[var(--brand)]/20 blur-3xl"></div>
 
-  <!-- Últimas entradas del blog -->
-  <h2 class="text-2xl font-semibold mt-12 mb-4">{% trans "Últimas noticias" %}</h2>
-  <div class="grid gap-6 md:grid-cols-3">
-    {% for p in ultimas %}
-      <article class="bg-white rounded-xl shadow hover:shadow-lg transition">
-        <a href="{% url 'blog_detalle' p.pk %}">
-          <img src="{{ p.imagen.url }}" class="w-full h-40 object-cover rounded-t-xl" alt="">
+  <div class="container mx-auto px-6 py-24 lg:py-32 grid gap-16 lg:grid-cols-2">
+    <!-- Texto principal -->
+    <div>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900">
+        {% trans "Revolucionamos la" %}<br>
+        <span class="text-[var(--brand)]">{% trans "forma de conectar" %}</span>
+      </h1>
+      <p class="mt-6 max-w-lg text-lg text-gray-600">
+        {% trans "Exportamos calidad colombiana al mundo, combinando logística, innovación y un servicio cercano." %}
+      </p>
+      <div class="mt-8 flex gap-4">
+        <a href="{% url 'productos' %}"
+           class="rounded-xl bg-[var(--brand)] px-8 py-3 text-white font-semibold hover:opacity-90 transition">
+          {% trans "Ver productos" %}
         </a>
-        <div class="p-4">
-          <h3 class="font-bold">{{ p.titulo }}</h3>
-          <p class="text-sm text-gray-500">{{ p.fecha }}</p>
-        </div>
-      </article>
-    {% empty %}
-      <p class="col-span-3 text-gray-500">{% trans "Aún no hay publicaciones." %}</p>
-    {% endfor %}
+        <a href="{% url 'contacto' %}"
+           class="rounded-xl border border-gray-300 px-8 py-3 font-semibold text-gray-700 hover:bg-gray-100 transition">
+          {% trans "Contáctanos" %}
+        </a>
+      </div>
+    </div>
+
+    <!-- Mosaico corporativo (4 fotos) -->
+    <div class="grid grid-cols-2 gap-4 self-center">
+      <img src="{% static 'img/17fba63c-5294-4c83-a15d-cdc51b426a72.JPG' %}" alt="{% trans 'Producto madera' %}"
+           class="h-48 w-full rounded-2xl object-cover shadow-lg" loading="lazy">
+      <img src="{% static 'img/IMG_9202.HEIC' %}" alt="{% trans 'Equipo de trabajo' %}"
+           class="h-72 w-full rounded-2xl object-cover shadow-lg" loading="lazy">
+      <img src="{% static 'img/379425CB-003E-4E91-97E2-A1F3E8095500.JPG' %}" alt="{% trans 'Proceso de empaque' %}"
+           class="h-72 w-full rounded-2xl object-cover shadow-lg" loading="lazy">
+      <!--<img src="{% static 'img/empresa/foto4.jpg' %}" alt="{% trans 'Exportación' %}"
+           class="h-48 w-full rounded-2xl object-cover shadow-lg" loading="lazy">-->
+    </div>
   </div>
 </section>
+
+{# ░░░ MINI-FEATURES ░░░ -------------------------------------------------- #}
+<section class="container mx-auto px-6 py-20">
+  <h2 class="text-center text-3xl md:text-4xl font-bold mb-12">
+    {% trans "¿Por qué elegirnos?" %}
+  </h2>
+  <div class="grid gap-10 md:grid-cols-3">
+    <div class="text-center space-y-4">
+      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 2"/></svg>
+      </div>
+      <h3 class="text-xl font-semibold">{% trans "Calidad garantizada" %}</h3>
+      <p class="text-sm text-gray-600">{% trans "Certificaciones internacionales y trazabilidad completa." %}</p>
+    </div>
+    <div class="text-center space-y-4">
+      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6a9 9 0 110 12A9 9 0 0112 6z"/></svg>
+      </div>
+      <h3 class="text-xl font-semibold">{% trans "Logística global" %}</h3>
+      <p class="text-sm text-gray-600">{% trans "Entregas puerta a puerta en los cinco continentes." %}</p>
+    </div>
+    <div class="text-center space-y-4">
+      <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[var(--brand)]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12l-4 4-4-4"/></svg>
+      </div>
+      <h3 class="text-xl font-semibold">{% trans "Escalabilidad" %}</h3>
+      <p class="text-sm text-gray-600">{% trans "Capacidad para crecer junto a tus pedidos." %}</p>
+    </div>
+  </div>
+</section>
+
+    {# ░░░ NOTICIA RECIENTE ░░░ --------------------------------------------- #}
+<section class="container mx-auto px-6 py-20 text-center">
+  <h2 class="text-3xl font-bold mb-8">{% trans "Última noticia" %}</h2>
+  {% if ultima %}
+    <article class="mx-auto max-w-md bg-white rounded-xl shadow hover:shadow-lg transition">
+      <a href="{% url 'blog_detalle' ultima.pk %}">
+        <img src="{{ ultima.imagen.url }}" class="w-full h-52 object-cover rounded-t-xl" alt="{{ ultima.titulo }}">
+      </a>
+      <div class="p-4">
+        <h3 class="font-bold">{{ ultima.titulo }}</h3>
+        <p class="text-sm text-gray-500">{{ ultima.fecha }}</p>
+      </div>
+    </article>
+  {% else %}
+    <p class="text-gray-500">{% trans "Aún no hay publicaciones." %}</p>
+  {% endif %}
+</section>
+
+{# ░░░ CTA CLARO ░░░ ----------------------------------------------------- #}
+<section class="relative overflow-hidden bg-[var(--brand)] py-20 text-white">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:36px_36px]"></div>
+
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">{% trans "¿Listo para llevar tu producto al mundo?" %}</h2>
+    <p class="mx-auto max-w-2xl mb-8 text-gray-200">
+      {% trans "Agenda una llamada de 15&nbsp;minutos con nuestro equipo y descubre cómo podemos ayudarte." %}
+    </p>
+    <a href="{% url 'contacto' %}"
+       class="inline-block rounded-xl bg-white px-10 py-4 font-semibold text-[var(--brand)] hover:opacity-90 transition">
+      {% trans "Agenda ahora" %}
+    </a>
+  </div>
+</section>
+
+
 {% endblock %}

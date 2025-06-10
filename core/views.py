@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Categoria, EntradaBlog
 
 def index(request):
-    ultimas = EntradaBlog.objects.order_by('-fecha')[:3]
-    return render(request, 'core/index.html', {'ultimas': ultimas})
+    ultima = EntradaBlog.objects.order_by('-fecha').first()
+    return render(request, 'core/index.html', {'ultima': ultima})
 
 def productos(request):
     cats = { c.nombre.lower(): c for c in
