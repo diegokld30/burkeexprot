@@ -3,12 +3,12 @@ from .models import Categoria, Producto, EntradaBlog
 
 @register(Categoria)
 class CategoriaTO(TranslationOptions):
-    fields = ('nombre',)
+    fields = ("nombre",)  # NO incluimos 'slug'
 
 @register(Producto)
 class ProductoTO(TranslationOptions):
-    fields = ('nombre', 'descripcion',)
+    fields = ("nombre", "descripcion")
 
 @register(EntradaBlog)
 class EntradaBlogTO(TranslationOptions):
-    fields = ('titulo', 'contenido',)
+    fields = ("titulo", "contenido")

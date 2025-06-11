@@ -2,7 +2,8 @@ from django.db import models
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
-
+    # ← deja momentáneamente null=True & blank=True
+    slug = models.SlugField(max_length=50, unique=True)
     class Meta:
         verbose_name_plural = "Categorías"
 
@@ -10,19 +11,21 @@ class Categoria(models.Model):
         return self.nombre
 
 class Producto(models.Model):
-    nombre = models.CharField(max_length=200)
+    nombre      = models.CharField(max_length=200)
     descripcion = models.TextField()
-    imagen = models.ImageField(upload_to='productos/')
-    categoria = models.ForeignKey(Categoria, related_name='productos', on_delete=models.CASCADE)
+    imagen      = models.ImageField(upload_to='productos/')
+    categoria   = models.ForeignKey(
+        Categoria, related_name='productos', on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.nombre
 
 class EntradaBlog(models.Model):
-    titulo = models.CharField(max_length=200)
+    titulo    = models.CharField(max_length=200)
     contenido = models.TextField()
-    imagen = models.ImageField(upload_to='blog/')
-    fecha = models.DateField(auto_now_add=True)
+    imagen    = models.ImageField(upload_to='blog/')
+    fecha     = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Entrada de Blog"

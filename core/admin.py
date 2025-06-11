@@ -4,7 +4,8 @@ from modeltranslation.admin import TranslationAdmin
 
 @admin.register(Categoria)
 class CategoriaAdmin(TranslationAdmin):
-    list_display = ('nombre',)
+    list_display = ("nombre", "slug")
+    prepopulated_fields = {"slug": ("nombre",)}  # rellena automáticamente al crear
 
 @admin.register(Producto)
 class ProductoAdmin(TranslationAdmin):
