@@ -1,0 +1,29 @@
+services:
+  # Contenedor de base de datos MySQL/MariaDB
+  db:
+    image: mariadb:10.9
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: burkeexport
+      MYSQL_USER: burkeuser
+      MYSQL_PASSWORD: burkeexport123
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # Contenedor de Django
+  web:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8001:8000"  # expone solo localmente en 8001
+    depends_on:
+      - db
+    volumes:
+      - ./staticfiles:/app/staticfiles
+      - ./media:/app/media
+
+volumes:
+  db_data:

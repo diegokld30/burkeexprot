@@ -2,14 +2,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.i18n import set_language   # 👈 si aún no lo habías importado
 
 urlpatterns = [
+    # Necesario para {% url 'set_language' %}
+    path('i18n/', include('django.conf.urls.i18n')),
+
+    # Panel de administración
     path('admin/', admin.site.urls),
+
+    # Tu aplicación principal
     path('', include('core.urls')),
-    path('i18n/setlang/', set_language, name='set_language'),
 ]
 
-# 👉  NO ENVUELVAS static(...) EN OTRA LISTA
+# Sirve MEDIA en DEBUG
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
