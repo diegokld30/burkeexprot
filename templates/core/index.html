@@ -1,4 +1,4 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
 {% load i18n static %}
 
 {% block title %}BurkeExport{% endblock %}
@@ -22,21 +22,23 @@
       <h1 class="text-4xl font-extrabold text-[var(--brand)] sm:text-5xl lg:text-6xl">
         {% trans "BurkeExport: calidad colombiana al mundo" %}
       </h1>
+
       <p class="mt-6 text-lg text-gray-700 leading-relaxed max-w-prose">
-        {% trans "Somos la marca #1 en exportación de madera, café y productos selectos 'otros'. Conectamos a productores locales con clientes globales mediante logística de alta eficiencia y un compromiso inquebrantable con la sostenibilidad." %}
+        {% blocktrans trimmed %}
+            Somos una empresa Colombo-Española con amplia experiencia en comercialización
+            internacional de productos no perecederos, principalmente derivados de maderas
+            cultivadas (Teca, Melina, Pino, Roble, Árbol de café y Cedro), procedentes de
+            bosques legales en distintas regiones de Colombia.
+        {% endblocktrans %}
       </p>
 
       <div class="mt-10 flex gap-4">
-        <a
-          href="{% url 'productos' %}"
-          class="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-8 py-3 font-semibold text-white shadow hover:opacity-90 active:scale-95"
-        >
+        <a href="{% url 'productos' %}"
+           class="inline-flex items-center gap-2 rounded-full bg-[var(--brand)] px-8 py-3 font-semibold text-white shadow hover:opacity-90 active:scale-95">
           {% trans "Ver&nbsp;productos" %}
         </a>
-        <a
-          href="{% url 'contacto' %}"
-          class="inline-flex items-center gap-2 rounded-full border border-[var(--brand)]/40 px-8 py-3 font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10 active:scale-95"
-        >
+        <a href="{% url 'contacto' %}"
+           class="inline-flex items-center gap-2 rounded-full border border-[var(--brand)]/40 px-8 py-3 font-semibold text-[var(--brand)] hover:bg-[var(--brand)]/10 active:scale-95">
           {% trans "Contáctanos" %}
         </a>
       </div>
@@ -46,12 +48,10 @@
     <div class="relative w-full flex justify-center lg:flex-1">
       <div class="relative size-60 sm:size-72 md:size-80">
         <div class="absolute inset-0 rounded-full bg-[var(--brand)]/10"></div>
-        <img
-          src="{% static 'img/planta.png' %}"
-          alt="{% trans 'Productos sostenibles' %}"
-          class="relative z-10 size-full rounded-full object-cover ring-4 ring-white shadow-xl"
-          loading="eager"
-        />
+        <img src="{% static 'img/bosqueTeca.png' %}"
+             alt="{% trans 'Productos sostenibles' %}"
+             class="relative z-10 size-full rounded-full object-cover ring-4 ring-white shadow-xl"
+             loading="eager">
       </div>
     </div>
   </div>
@@ -129,7 +129,7 @@
   </div>
 </section>
 
-{# ░░░ ÚLTIMA NOTICIA (sin cambios lógicos) ░░░ --------------------------- #}
+{# ░░░ ÚLTIMA NOTICIA ░░░ ------------------------------------------------- #}
 <section class="container mx-auto px-6 py-20 text-center">
   <h2 class="text-3xl font-bold mb-8">{% trans "Última noticia" %}</h2>
   {% if ultima %}
@@ -156,7 +156,10 @@
       {% trans "¿Listo para llevar tu producto al mundo?" %}
     </h2>
     <p class="mx-auto max-w-2xl mb-8 text-gray-100">
-      {% trans "Agenda una llamada de 15&nbsp;minutos con nuestro equipo y descubre cómo podemos ayudarte." %}
+      {% blocktrans trimmed %}
+        Agenda una llamada de 15&nbsp;minutos con nuestro equipo y descubre cómo
+        podemos ayudarte.
+      {% endblocktrans %}
     </p>
     <a href="{% url 'contacto' %}"
        class="inline-block rounded-full bg-white px-10 py-4 font-semibold text-[var(--brand)] shadow hover:opacity-90 transition">

@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ───────── Entorno ─────────
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-fallback-key")
-DEBUG = os.environ.get("DEBUG", "False").lower() in ("true", "1", "yes")
+DEBUG = os.environ.get("DEBUG", "True").lower() in ("true", "1", "yes")
 
 # ALLOWED_HOSTS desde .env, p. ej. "burkeexport.com,www.burkeexport.com,127.0.0.1"
 _raw_hosts = os.environ.get("ALLOWED_HOSTS", "")

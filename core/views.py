@@ -6,17 +6,34 @@ def index(request):
     return render(request, "core/index.html", {"ultima": ultima})
 
 def productos(request):
+    # Consigue las categorías con sus productos
     cats = {c.slug: c for c in Categoria.objects.prefetch_related("productos")}
 
-    return render(
-        request,
-        "core/productos.html",
+    # Prepara la lista para el template
+    categories = [
         {
-            "madera": cats.get("madera").productos.all() if "madera" in cats else [],
-            "cafe":   cats.get("cafe").productos.all()   if "cafe"   in cats else [],
-            "otros":  cats.get("otros").productos.all()  if "otros"  in cats else [],
+            "slug": "madera",
+            "items": cats.get("madera").productos.all() if "madera" in cats else [],
+            "color": "teal",
+            "label": "Madera",
         },
-    )
+        {
+            "slug": "cafe",
+            "items": cats.get("cafe").productos.all() if "cafe" in cats else [],
+            "color": "amber",
+            "label": "Café",
+        },
+        {
+            "slug": "otros",
+            "items": cats.get("otros").productos.all() if "otros" in cats else [],
+            "color": "cyan",
+            "label": "Otros",
+        },
+    ]
+
+    return render(request, "core/productos.html", {
+        "categories": categories
+    })
 
 def nosotros(request):
     return render(request, "core/nosotros.html")

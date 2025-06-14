@@ -35,11 +35,13 @@
       </ul>
 
       <!-- selector de idioma -->
+        <!-- selector de idioma -->
         <form action="{% url 'set_language' %}" method="post">
           {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
           <select name="language" onchange="this.form.submit()">
-            <option value="es" {% if LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
-            <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+              <option value="es" {% if request.LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
+              <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
           </select>
         </form>
 

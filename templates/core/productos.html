@@ -4,184 +4,121 @@
 {% block title %}{% trans "Productos" %}{% endblock %}
 
 {% block content %}
-{# ░░░ HERO COMPACTO ░░░ -------------------------------------------------- #}
+<!-- Hero Section -->
 <section class="relative overflow-hidden bg-white pt-20 lg:pt-28">
   <div class="absolute inset-0 -z-10 bg-grid-slate/5 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
 
-  <div class="container mx-auto flex flex-col items-center gap-10 px-6 pb-24 lg:flex-row lg:gap-16 lg:pb-32">
-    <!-- Texto -->
-    <div class="w-full max-w-xl text-center lg:text-left">
-      <h1 class="text-4xl font-extrabold text-[var(--brand)] sm:text-5xl lg:text-6xl">
+  <div class="container mx-auto flex flex-col-reverse lg:flex-row items-center lg:items-start gap-10 px-6 pb-24 lg:pb-32">
+    <!-- Text Content -->
+    <div class="w-full lg:w-1/2 text-center lg:text-left">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--brand)]">
         {% trans "Descubre nuestra colección" %}
       </h1>
+      {% blocktrans %}
       <p class="mt-6 text-lg text-gray-700 leading-relaxed">
-        {% trans "Somos la marca #1 en exportación de madera, café y artículos de calidad superior. Elige el producto ideal y potencia tu negocio con BurkeExport." %}
+        Todos nuestros productos son calidad de exportación y procedencia 100% legal. Contamos con altos estándares de procesamiento para cada uno de nuestros productos.
       </p>
+      {% endblocktrans %}
+
+      <h2 class="mt-8 text-2xl font-semibold text-gray-800">
+        {% trans "Derivados de Madera:" %}
+      </h2>
+      <ul class="mt-4 space-y-2 text-gray-700 list-inside list-disc">
+        <li>{% trans "Decks" %}</li>
+        <li>{% trans "Estructuras" %}</li>
+        <li>{% trans "Kits Prefabricados (Módulos para casas, cabañas, zonas húmedas y oficinas)" %}</li>
+      </ul>
 
       <!-- Tabs -->
-      <div class="mt-10 flex flex-wrap justify-center gap-3 lg:justify-start">
-        <button data-tab="madera"
-          class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow backdrop-blur transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-teal-500">
-          Madera
+      <div class="mt-10 flex flex-wrap justify-center lg:justify-start gap-3">
+        <button data-tab="madera" class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow hover:scale-105 focus-visible:ring-2 focus-visible:ring-teal-500 transition">
+          {% trans "Madera" %}
         </button>
-        <button data-tab="cafe"
-          class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow backdrop-blur transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-amber-500">
-          Café
+        <button data-tab="cafe" class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow hover:scale-105 focus-visible:ring-2 focus-visible:ring-amber-500 transition">
+          {% trans "Café" %}
         </button>
-        <button data-tab="otros"
-          class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow backdrop-blur transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-cyan-500">
-          Otros
+        <button data-tab="otros" class="tab-btn rounded-full bg-white px-5 py-2 text-sm font-medium text-gray-800 shadow hover:scale-105 focus-visible:ring-2 focus-visible:ring-cyan-500 transition">
+          {% trans "Otros" %}
         </button>
       </div>
     </div>
 
-    <!-- Imagen hero (circular) -->
-    <div class="relative w-full flex justify-center lg:flex-1">
-      <div class="relative size-60 sm:size-72 md:size-80">
+    <!-- Hero Image -->
+    <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+      <div class="relative w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80">
         <div class="absolute inset-0 rounded-full bg-[var(--brand)]/10"></div>
-        <img src="{% static 'img/casa-madera-1.png' %}"
+        <img src="{% static 'img/telcaBosque.png' %}"
              alt="{% trans 'Colección de productos' %}"
-             class="relative z-10 size-full rounded-full object-cover ring-4 ring-white shadow-xl"
+             class="relative z-10 rounded-full object-cover w-full h-full ring-4 ring-white shadow-xl"
              loading="eager">
       </div>
     </div>
   </div>
 </section>
 
-{# ░░░ LISTADOS ░░░ ------------------------------------------------------- #}
-<section class="container mx-auto px-6 pb-24">
-  <!-- MADERA -->
-  <div id="panel-madera" class="flex flex-wrap justify-center gap-10">
-    {% for p in madera %}
-      <article
-        class="group relative w-full max-w-[280px] overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
-        <span
-          class="absolute right-4 top-4 inline-block rounded-full bg-teal-600 px-3 py-1 text-xs font-semibold text-white shadow">
-          Madera
+<!-- Product Grids -->
+<section class="container mx-auto px-6 pb-24 space-y-16">
+  {% for cat in categories %}
+  <div id="panel-{{ cat.slug }}" class="flex flex-wrap justify-center gap-10{% if not forloop.first %} hidden{% endif %}">
+    {% if cat.items %}
+      {% for p in cat.items %}
+      <article class="group relative w-full max-w-xs overflow-hidden rounded-3xl bg-white shadow-md ring-1 ring-gray-100 hover:shadow-lg transform transition hover:-translate-y-1">
+        <span class="absolute right-4 top-4 inline-block rounded-full bg-{{ cat.color }}-600 px-3 py-1 text-xs font-semibold text-white">
+          {% trans cat.label %}
         </span>
-
         <div class="aspect-square overflow-hidden">
-          <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
-               class="h-full w-full object-cover transition duration-300 group-hover:scale-110">
+          <img src="{{ p.imagen.url }}"
+               alt="{{ p.nombre }}"
+               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
         </div>
-
-        <div class="p-6">
-          <h2 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h2>
-          <p class="mt-2 line-clamp-3 text-sm text-gray-600">{{ p.descripcion }}</p>
-
-          <button
-            class="mt-6 flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 px-5 py-2 text-sm font-medium text-white shadow hover:from-emerald-500 hover:to-teal-500 active:scale-95">
+        <div class="p-6 flex flex-col">
+          <h3 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h3>
+          <p class="mt-2 flex-1 text-sm text-gray-600 line-clamp-3">{{ p.descripcion }}</p>
+          <button class="mt-6 inline-flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-{{ cat.color }}-500 to-{{ cat.color }}-400 px-5 py-2 text-sm font-medium text-white shadow hover:opacity-90 transition">
             {% trans "Lo quiero" %}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-4 w-4"
+                 fill="none"
+                 viewBox="0 0 24 24"
                  stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
         </div>
       </article>
-    {% empty %}
-      <p class="w-full text-center text-gray-500">{% trans "No hay productos de madera." %}</p>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+      <p class="w-full text-center text-gray-500">
+        {% trans "No hay productos en esta categoría." %}
+      </p>
+    {% endif %}
   </div>
-
-  <!-- CAFÉ -->
-  <div id="panel-cafe" class="hidden flex flex-wrap justify-center gap-10">
-    {% for p in cafe %}
-      <article
-        class="group relative w-full max-w-[280px] overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
-        <span
-          class="absolute right-4 top-4 inline-block rounded-full bg-amber-600 px-3 py-1 text-xs font-semibold text-white shadow">
-          Café
-        </span>
-
-        <div class="aspect-square overflow-hidden">
-          <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
-               class="h-full w-full object-cover transition duration-300 group-hover:scale-110">
-        </div>
-
-        <div class="p-6">
-          <h2 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h2>
-          <p class="mt-2 line-clamp-3 text-sm text-gray-600">{{ p.descripcion }}</p>
-
-          <button
-            class="mt-6 flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-amber-500 to-yellow-400 px-5 py-2 text-sm font-medium text-white shadow hover:from-yellow-400 hover:to-amber-500 active:scale-95">
-            {% trans "Lo quiero" %}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </button>
-        </div>
-      </article>
-    {% empty %}
-      <p class="w-full text-center text-gray-500">{% trans "No hay productos de café." %}</p>
-    {% endfor %}
-  </div>
-
-  <!-- OTROS -->
-  <div id="panel-otros" class="hidden flex flex-wrap justify-center gap-10">
-    {% for p in otros %}
-      <article
-        class="group relative w-full max-w-[280px] overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-1 hover:shadow-lg">
-        <span
-          class="absolute right-4 top-4 inline-block rounded-full bg-cyan-600 px-3 py-1 text-xs font-semibold text-white shadow">
-          Otros
-        </span>
-
-        <div class="aspect-square overflow-hidden">
-          <img src="{{ p.imagen.url }}" alt="{{ p.nombre }}"
-               class="h-full w-full object-cover transition duration-300 group-hover:scale-110">
-        </div>
-
-        <div class="p-6">
-          <h2 class="text-lg font-semibold text-gray-800">{{ p.nombre }}</h2>
-          <p class="mt-2 line-clamp-3 text-sm text-gray-600">{{ p.descripcion }}</p>
-
-          <button
-            class="mt-6 flex items-center justify-center gap-2 w-full rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-5 py-2 text-sm font-medium text-white shadow hover:from-sky-500 hover:to-cyan-500 active:scale-95">
-            {% trans "Lo quiero" %}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </button>
-        </div>
-      </article>
-    {% empty %}
-      <p class="w-full text-center text-gray-500">{% trans "No hay otros productos." %}</p>
-    {% endfor %}
-  </div>
+  {% endfor %}
 </section>
 
-{# ░░░ CTA FINAL ░░░ ------------------------------------------------------ #}
-<section class="relative overflow-hidden bg-[var(--brand)] py-20 text-white">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:36px_36px]"></div>
-
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4">{% trans "¿Listo para comenzar?" %}</h2>
-    <p class="mx-auto max-w-2xl mb-8 text-gray-100">
-      {% trans "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas." %}
-    </p>
-    <a href="{% url 'contacto' %}"
-       class="inline-block rounded-full bg-white px-10 py-4 font-semibold text-[var(--brand)] shadow hover:opacity-90 transition">
+<!-- Call to Action -->
+<section class="bg-[var(--brand)] text-white py-20">
+  <div class="container mx-auto text-center px-6">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-4">{% trans "¿Listo para comenzar?" %}</h2>
+    <p class="mb-8 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">{% trans "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas." %}</p>
+    <a href="{% url 'contacto' %}" class="inline-block rounded-full bg-white text-[var(--brand)] font-semibold px-10 py-4 shadow hover:opacity-90 transition">
       {% trans "Solicitar propuesta" %}
     </a>
   </div>
 </section>
+{% endblock %}
 
-{# ░░░ SCRIPTS TABS ░░░ --------------------------------------------------- #}
+{% block extra_js %}
 <script>
-  const tabs   = document.querySelectorAll('.tab-btn');
+  const tabs = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('[id^="panel-"]');
-
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('ring', 'ring-offset-2'));
       tab.classList.add('ring', 'ring-offset-2');
-
       const target = tab.dataset.tab;
       panels.forEach(p => p.classList.toggle('hidden', p.id !== `panel-${target}`));
     });
