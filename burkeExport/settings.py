@@ -7,7 +7,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ───────── Entorno ─────────
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-fallback-key")
 DEBUG = os.environ.get("DEBUG", "True").lower() in ("true", "1", "yes")
-
 # ALLOWED_HOSTS desde .env, p. ej. "burkeexport.com,www.burkeexport.com,127.0.0.1"
 _raw_hosts = os.environ.get("ALLOWED_HOSTS", "")
 ALLOWED_HOSTS = [h.strip() for h in _raw_hosts.split(",") if h.strip()]
@@ -64,9 +63,6 @@ DATABASES = {
         'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
         'HOST': os.environ.get('DATABASE_HOST', ''),
         'PORT': os.environ.get('DATABASE_PORT', ''),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
     }
 }
 

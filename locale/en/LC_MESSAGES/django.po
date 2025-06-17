@@ -184,6 +184,9 @@ msgstr "Wood"
 msgid "Café"
 msgstr "Coffee"
 
+msgid "Cacao"
+msgstr "Cocoa"
+
 #: .\templates\core\index.html:127 .\templates\core\productos.html:41
 msgid "Otros"
 msgstr "Others"

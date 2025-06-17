@@ -6,34 +6,29 @@ def index(request):
     return render(request, "core/index.html", {"ultima": ultima})
 
 def productos(request):
-    # Consigue las categorías con sus productos
     cats = {c.slug: c for c in Categoria.objects.prefetch_related("productos")}
 
-    # Prepara la lista para el template
+    # Colores Tailwind para cada categoría
+    color_map = {
+        "madera": "teal",
+        "cafe":   "amber",
+        "cacao":  "orange",
+        "otros":  "cyan",
+    }
+
+    ordered_slugs = ["madera", "cafe", "cacao", "otros"]
+
     categories = [
         {
-            "slug": "madera",
-            "items": cats.get("madera").productos.all() if "madera" in cats else [],
-            "color": "teal",
-            "label": "Madera",
-        },
-        {
-            "slug": "cafe",
-            "items": cats.get("cafe").productos.all() if "cafe" in cats else [],
-            "color": "amber",
-            "label": "Café",
-        },
-        {
-            "slug": "otros",
-            "items": cats.get("otros").productos.all() if "otros" in cats else [],
-            "color": "cyan",
-            "label": "Otros",
-        },
+            "slug": slug,
+            "items": cats.get(slug).productos.all() if slug in cats else [],
+            "color": color_map[slug],
+            "label": slug.capitalize() if slug != "cafe" else "Café",
+        }
+        for slug in ordered_slugs
     ]
 
-    return render(request, "core/productos.html", {
-        "categories": categories
-    })
+    return render(request, "core/productos.html", {"categories": categories})
 
 def nosotros(request):
     return render(request, "core/nosotros.html")
