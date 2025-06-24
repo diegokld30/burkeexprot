@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-14 09:38-0500\n"
+"POT-Creation-Date: 2025-06-24 15:10-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,11 +110,13 @@ msgid "Enviar a WhatsApp"
 msgstr "Send to WhatsApp"
 
 #: .\templates\core\index.html:23
-msgid "BurkeExport: calidad colombiana al mundo"
+
+#| msgid "BurkeExport: calidad colombiana al mundo"
+msgid "Burke Export: CALIDAD colombiana al mundo."
 msgstr "BurkeExport: Colombian quality to the world"
 
 #: .\templates\core\index.html:27
-#, fuzzy
+
 #| msgid ""
 #| "Somos una empresa Colombo- Española, con amplia experiencia en "
 #| "comercialización internacional de productos no perecederos, "
@@ -125,12 +127,10 @@ msgid ""
 "Somos una empresa Colombo-Española con amplia experiencia en "
 "comercialización internacional de productos no perecederos, principalmente "
 "derivados de maderas cultivadas (Teca, Melina, Pino, Roble, Árbol de café y "
-"Cedro), procedentes de bosques legales en distintas regiones de Colombia."
+"Cedro), procedentes de bosques legales en distintas regiones de Colombia. "
+"También exportamos café y cacao de la más alta calidad."
 msgstr ""
-"We are a Colombian-Spanish company with extensive experience in the "
-"international trade of non-perishable products, mainly cultivated wood "
-"derivatives (Teak, Melina, Pine, Oak, Coffee Tree and Cedar) sourced from "
-"legal forests in different regions of Colombia."
+"We are a Colombian-Spanish company with extensive experience in the international trade of non-perishable products, primarily cultivated wood derivatives (Teak, Melina, Pine, Oak, Coffee Tree, and Cedar), sourced from legally managed forests across various regions of Colombia. We also export the highest-quality coffee and cocoa"
 
 #: .\templates\core\index.html:38
 msgid "Ver&nbsp;productos"
@@ -145,16 +145,22 @@ msgid "Productos sostenibles"
 msgstr "Sustainable Products"
 
 #: .\templates\core\index.html:63
-msgid "¿Por qué elegir BurkeExport?"
-msgstr "Why Choose BurkeExport?"
+
+#| msgid "¿Por qué elegir BurkeExport?"
+msgid "¿Por qué elegir Burke Export?"
+msgstr "Why Choose Burke Export?"
 
 #: .\templates\core\index.html:73
 msgid "Calidad garantizada"
 msgstr "Guaranteed Quality"
 
 #: .\templates\core\index.html:74
-msgid "Certificaciones internacionales y trazabilidad completa."
-msgstr "International certifications and full traceability."
+msgid ""
+"Contamos con certificaciones internacionales, trazabilidad de todos nuestros "
+"productos desde el origen, sostenibilidad, calidad y cumplimiento."
+msgstr ""
+"We hold international certifications, ensure full traceability of all our "
+"products from origin, and prioritize sustainability, quality, and compliance."
 
 #: .\templates\core\index.html:83
 msgid "Logística global"
@@ -184,33 +190,34 @@ msgstr "Wood"
 msgid "Café"
 msgstr "Coffee"
 
+#: .\templates\core\index.html:127 .\templates\core\productos.html:42
 msgid "Cacao"
 msgstr "Cocoa"
 
-#: .\templates\core\index.html:127 .\templates\core\productos.html:41
+#: .\templates\core\index.html:135 .\templates\core\productos.html:45
 msgid "Otros"
 msgstr "Others"
 
-#: .\templates\core\index.html:134
+#: .\templates\core\index.html:142
 msgid "Última noticia"
 msgstr "Latest news"
 
-#: .\templates\core\index.html:146
+#: .\templates\core\index.html:154
 msgid "Aún no hay publicaciones."
 msgstr "No posts yet."
 
-#: .\templates\core\index.html:156
+#: .\templates\core\index.html:164
 msgid "¿Listo para llevar tu producto al mundo?"
 msgstr "Ready to take your product to the world?"
 
-#: .\templates\core\index.html:159
+#: .\templates\core\index.html:167
 msgid ""
 "Agenda una llamada de 15&nbsp;minutos con nuestro equipo y descubre cómo "
 "podemos ayudarte."
 msgstr ""
 "Schedule a 15-minute call with our team and discover how we can help you."
 
-#: .\templates\core\index.html:166
+#: .\templates\core\index.html:174
 msgid "Agenda ahora"
 msgstr "Schedule now"
 
@@ -348,26 +355,29 @@ msgid ""
 "Kits Prefabricados (Módulos para casas, cabañas, zonas húmedas y oficinas)"
 msgstr "Prefabricated Kits (Modules for homes, cabins, wet areas, and offices)"
 
-#: .\templates\core\productos.html:51
+#: .\templates\core\productos.html:55
 msgid "Colección de productos"
 msgstr "Product Showcase"
 
-#: .\templates\core\productos.html:78
+#: .\templates\core\productos.html:82
 msgid "Lo quiero"
 msgstr "I Want It"
 
-#: .\templates\core\productos.html:95
+#: .\templates\core\productos.html:99
 msgid "No hay productos en esta categoría."
 msgstr "There are no products in this category."
 
-#: .\templates\core\productos.html:105
+#: .\templates\core\productos.html:109
 msgid "¿Listo para comenzar?"
 msgstr "Ready to Get Started?"
 
-#: .\templates\core\productos.html:106
+#: .\templates\core\productos.html:110
 msgid "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas."
 msgstr "Contact us and receive your personalized proposal within 24 hours."
 
-#: .\templates\core\productos.html:108
+#: .\templates\core\productos.html:112
 msgid "Solicitar propuesta"
 msgstr "Request Proposal"
+
+#~ msgid "Certificaciones internacionales y trazabilidad completa."
+#~ msgstr "International certifications and full traceability."

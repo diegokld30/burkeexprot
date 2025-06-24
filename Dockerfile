@@ -1,34 +1,37 @@
-# Usa Python 3.13 slim
+# syntax=docker/dockerfile:1
+
+# ─── 1. Imagen base ─────────────────────────────────────────────
 FROM python:3.13-slim
 
-# Desactiva buffering y apunta al settings de producción
+# ─── 2. Variables de entorno ────────────────────────────────────
 ENV PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=burkeExport.settings
 
 WORKDIR /app
 
-# Instala dependencias para compilar mysqlclient
-RUN apt-get update \
- && apt-get install -y \
-      build-essential \
-      default-libmysqlclient-dev \
-      pkg-config \
-      python3-dev \
-    --no-install-recommends \
- && rm -rf /var/lib/apt/lists/*
+# ─── 3. Dependencias de sistema ─────────────────────────────────
+#    * gettext ➜ aporta `msgfmt` para compilemessages
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        default-libmysqlclient-dev \
+        pkg-config \
+        python3-dev \
+        gettext \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copia e instala tus dependencias Python
+# ─── 4. Dependencias Python ─────────────────────────────────────
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt \
  && pip install --no-cache-dir mysqlclient
 
-# Copia el resto del código
+# ─── 5. Copia del proyecto ──────────────────────────────────────
 COPY . .
 
-# Genera los archivos estáticos
-RUN python manage.py collectstatic --noinput
+# ─── 6. Compila catálogos + genera staticfiles ──────────────────
+RUN python manage.py compilemessages \
+ && python manage.py collectstatic --noinput
 
+# ─── 7. Exposición y arranque ───────────────────────────────────
 EXPOSE 8000
-
-# Arranca Gunicorn apuntando al WSGI de tu proyecto
 CMD ["gunicorn", "burkeExport.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
