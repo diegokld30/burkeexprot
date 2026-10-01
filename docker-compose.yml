@@ -1,50 +1,44 @@
-#PRODUCCION
+# PRODUCCIÓN — las contraseñas se leen del archivo .env (no versionado)
+# ⚠️ No cambies el nombre del servicio "db" ni del volumen "db_data": ahí están los datos.
 services:
-  # Contenedor de base de datos MySQL/MariaDB
   db:
-    image: mariadb:10.9
+    image: mariadb:11.4   # LTS con parches de seguridad hasta 2029
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: burkeexport
-      MYSQL_USER: burkeuser
-      MYSQL_PASSWORD: burkeexport123
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Define DB_ROOT_PASSWORD en .env}
+      MARIADB_DATABASE: ${DATABASE_NAME:?Define DATABASE_NAME en .env}
+      MARIADB_USER: ${DATABASE_USER:?Define DATABASE_USER en .env}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD:?Define DATABASE_PASSWORD en .env}
+      MARIADB_AUTO_UPGRADE: "1"   # actualiza las tablas del sistema al cambiar de versión
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "--silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    security_opt:
+      - no-new-privileges:true
 
-  # Contenedor de Django
   web:
     build: .
     restart: always
     env_file:
       - .env
     ports:
-      - "127.0.0.1:8001:8000"  # expone solo localmente en 8001
+      - "127.0.0.1:${WEB_PORT:-8001}:8000"  # solo accesible desde nginx en este servidor (WEB_PORT en .env)
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
-      - ./staticfiles:/app/staticfiles
       - ./media:/app/media
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
 
 volumes:
   db_data:
-
-##DEV
-#version: "3.9"
-
-#services:
-#  db:
-#    image: mariadb:10.9
-#    restart: always
-#     ports:          # ⬅️  EXpone 3306 al host
-#       - "3306:3306"
-#     environment:
-#       MYSQL_ROOT_PASSWORD: rootpassword
-#       MYSQL_DATABASE: burkeexport
-#       MYSQL_USER: burkeuser
-#       MYSQL_PASSWORD: burkeexport123
-#     volumes:
-#       - db_data:/var/lib/mysql
-
-# volumes:
-#   db_data:

@@ -8,121 +8,379 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-24 15:10-0500\n"
+"POT-Creation-Date: 2026-10-01 00:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\core\base.html:31 .\templates\core\productos.html:4
-msgid "Productos"
-msgstr "Products"
+#: core/urls.py:8
+#| msgid "Productos"
+msgid "productos/"
+msgstr "products/"
 
-#: .\templates\core\base.html:32 .\templates\core\nosotros.html:4
+#: core/urls.py:9
+#| msgid "Nosotros"
+msgid "nosotros/"
+msgstr "about-us/"
+
+#: core/urls.py:10
+#| msgid "Contacto"
+msgid "contacto/"
+msgstr "contact/"
+
+#: core/views.py:19
+#| msgid ""
+#| "Burke Export: exportación de derivados de madera, café y cacao de Colombia "
+#| "al mundo."
+msgid "Burke Export | Exportadores de madera, café y cacao de Colombia"
+msgstr "Burke Export | Exporters of Colombian wood products, coffee and cocoa"
+
+#: core/views.py:21
+msgid ""
+"Empresa colombo-española exportadora de derivados de maderas cultivadas, "
+"café y cacao de Colombia. Procedencia legal, trazabilidad y logística "
+"global."
+msgstr ""
+"Colombian-Spanish exporter of plantation-grown wood products, coffee and "
+"cocoa from Colombia. Legal origin, full traceability and global logistics."
+
+#: core/views.py:42
+msgid "Productos: madera, café y cacao de exportación"
+msgstr "Products: export-grade wood, coffee and cocoa"
+
+#: core/views.py:44
+msgid ""
+"Decks, madera estructural, pisos interiores y módulos prefabricados en "
+"maderas cultivadas, además de café y cacao colombianos con calidad de "
+"exportación."
+msgstr ""
+"Decking, structural timber, interior flooring and prefabricated modules in "
+"plantation-grown wood, plus export-grade Colombian coffee and cocoa."
+
+#: core/views.py:52 templates/core/base.html:56 templates/core/base.html:86
+#: templates/core/base.html:121 templates/core/nosotros.html:5
 msgid "Nosotros"
 msgstr "About Us"
 
-#: .\templates\core\base.html:33 .\templates\core\contacto.html:4
+#: core/views.py:54
+#| msgid ""
+#| "Un equipo multicultural que lleva la esencia de Colombia al mundo, "
+#| "exportando madera, café y productos de calidad incomparable."
+msgid ""
+"Conoce a Burke Export: un equipo multicultural que lleva la esencia de "
+"Colombia al mundo con calidad, integridad y sostenibilidad."
+msgstr ""
+"Meet Burke Export: a multicultural team bringing the essence of Colombia to "
+"the world with quality, integrity and sustainability."
+
+#: core/views.py:62 templates/core/base.html:58 templates/core/base.html:88
+#: templates/core/base.html:124 templates/core/base.html:139
+#: templates/core/contacto.html:5
 msgid "Contacto"
 msgstr "Contact"
 
-#: .\templates\core\base.html:34 .\templates\core\blog_lista.html:4
+#: core/views.py:64
+msgid ""
+"Habla con un asesor de Burke Export y recibe una propuesta personalizada "
+"para tu proyecto de importación."
+msgstr ""
+"Talk to a Burke Export advisor and receive a tailored proposal for your "
+"import project."
+
+#: core/views.py:74
+#| msgid "Última noticia"
+msgid "Blog y noticias"
+msgstr "Blog & news"
+
+#: core/views.py:76
+msgid ""
+"Noticias, proyectos y conocimiento sobre maderas cultivadas, café y cacao de"
+" Colombia para el mercado internacional."
+msgstr ""
+"News, projects and insights on Colombian plantation-grown wood, coffee and "
+"cocoa for international markets."
+
+#: templates/404.html:6
+msgid "Error 404"
+msgstr "Error 404"
+
+#: templates/404.html:7
+msgid "No encontramos esta página."
+msgstr "We couldn't find this page."
+
+#: templates/404.html:8
+msgid ""
+"Es posible que la dirección haya cambiado. Te invitamos a continuar desde "
+"aquí:"
+msgstr "The address may have changed. Please continue from here:"
+
+#: templates/404.html:10
+msgid "Ir al inicio"
+msgstr "Go to home page"
+
+#: templates/404.html:11 templates/core/index.html:27
+#| msgid "Ver&nbsp;productos"
+msgid "Ver productos"
+msgstr "View products"
+
+#: templates/core/base.html:43
+msgid "Saltar al contenido"
+msgstr "Skip to content"
+
+#: templates/core/base.html:48
+msgid "Principal"
+msgstr "Main"
+
+#: templates/core/base.html:49 templates/core/blog_detalle.html:9
+msgid "Inicio"
+msgstr "Home"
+
+#: templates/core/base.html:55 templates/core/base.html:85
+#: templates/core/base.html:122
+msgid "Productos"
+msgstr "Products"
+
+#: templates/core/base.html:57 templates/core/base.html:87
+#: templates/core/base.html:123 templates/core/blog_detalle.html:11
+#: templates/core/blog_lista.html:5
 msgid "Blog"
 msgstr "Blog"
 
-#: .\templates\core\blog_lista.html:29
-msgid "Leer más"
-msgstr "Read more"
+#: templates/core/base.html:64
+msgid "Idioma"
+msgstr "Language"
 
-#: .\templates\core\blog_lista.html:43
+#: templates/core/base.html:74 templates/core/base.html:91
+#: templates/core/index.html:30
+msgid "Contáctanos"
+msgstr "Contact Us"
+
+#: templates/core/base.html:78
+msgid "Menú"
+msgstr "Menu"
+
+#: templates/core/base.html:114
+#| msgid ""
+#| "Burke Export: exportación de derivados de madera, café y cacao de Colombia "
+#| "al mundo."
+msgid ""
+"Empresa colombo-española dedicada a la exportación de derivados de maderas "
+"cultivadas, café y cacao de la más alta calidad."
+msgstr ""
+"Colombian-Spanish company exporting plantation-grown wood products, coffee "
+"and cocoa of the highest quality."
+
+#: templates/core/base.html:119
+msgid "Compañía"
+msgstr "Company"
+
+#: templates/core/base.html:129
+msgid "Líneas"
+msgstr "Product lines"
+
+#: templates/core/base.html:131 templates/core/contacto.html:59
+#: templates/core/index.html:126
+msgid "Madera"
+msgstr "Wood"
+
+#: templates/core/base.html:132 templates/core/contacto.html:60
+#: templates/core/index.html:126
+msgid "Café"
+msgstr "Coffee"
+
+#: templates/core/base.html:133 templates/core/contacto.html:61
+#: templates/core/index.html:126
+msgid "Cacao"
+msgstr "Cocoa"
+
+#: templates/core/base.html:134 templates/core/contacto.html:62
+#: templates/core/index.html:126
+msgid "Otros"
+msgstr "Others"
+
+#: templates/core/base.html:150
+msgid "Todos los derechos reservados."
+msgstr "All rights reserved."
+
+#: templates/core/base.html:151
+msgid "Calidad colombiana para el mundo."
+msgstr "Colombian quality for the world."
+
+#: templates/core/base.html:157
+msgid "Escríbenos por WhatsApp"
+msgstr "Message us on WhatsApp"
+
+#: templates/core/blog_detalle.html:7
+msgid "Ruta de navegación"
+msgstr "Breadcrumb"
+
+#: templates/core/blog_detalle.html:30
+msgid "Volver al blog"
+msgstr "Back to the blog"
+
+#: templates/core/blog_lista.html:5
 msgid "Noticias recientes"
 msgstr "Recent news"
 
-#: .\templates\core\blog_lista.html:72 .\templates\core\blog_lista.html:78
-msgid "No hay entradas publicadas."
-msgstr "No posts published."
-
-#: .\templates\core\blog_lista.html:90
-msgid "¿Quieres saber más sobre nuestros proyectos de exportación?"
-msgstr "Want to know more about our export projects?"
-
-#: .\templates\core\blog_lista.html:93
+#: templates/core/blog_lista.html:6
 msgid "Contáctanos y descubre cómo BurkeExport puede impulsar tu negocio."
 msgstr "Contact us and discover how BurkeExport can boost your business."
 
-#: .\templates\core\blog_lista.html:97
-msgid "Habla con un asesor"
-msgstr "Talk to an advisor"
+#: templates/core/blog_lista.html:18
+msgid "Destacado"
+msgstr "Featured"
 
-#: .\templates\core\contacto.html:16
+#: templates/core/blog_lista.html:23 templates/core/index.html:232
+msgid "Leer más"
+msgstr "Read more"
+
+#: templates/core/blog_lista.html:48
+msgid "No hay entradas publicadas."
+msgstr "No posts published."
+
+#: templates/core/contacto.html:5
 msgid "Hablemos de negocios"
 msgstr "Let's Talk Business"
 
-#: .\templates\core\contacto.html:19
+#: templates/core/contacto.html:6
 msgid ""
 "Completa el formulario y un asesor te responderá en minutos vía WhatsApp."
 msgstr ""
 "Fill out the form and an advisor will get back to you via WhatsApp in "
 "minutes."
 
-#: .\templates\core\contacto.html:29
+#: templates/core/contacto.html:12
+msgid "Estamos para ayudarte"
+msgstr "We are here to help"
+
+#: templates/core/contacto.html:13 templates/core/partials/cta.html:9
+msgid "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas."
+msgstr "Contact us and receive your personalized proposal within 24 hours."
+
+#: templates/core/contacto.html:25
+msgid "Sede"
+msgstr "Headquarters"
+
+#: templates/core/contacto.html:37
 msgid "Nombre"
 msgstr "Name"
 
-#: .\templates\core\contacto.html:32
+#: templates/core/contacto.html:39
 msgid "Tu nombre completo"
 msgstr "Your full name"
 
-#: .\templates\core\contacto.html:57
+#: templates/core/contacto.html:45
+msgid "nombre@empresa.com"
+msgstr "name@company.com"
+
+#: templates/core/contacto.html:49
 msgid "Teléfono"
 msgstr "Phone"
 
-#: .\templates\core\contacto.html:68
+#: templates/core/contacto.html:55
 msgid "Interés"
 msgstr "Interest"
 
-#: .\templates\core\contacto.html:73
+#: templates/core/contacto.html:58
 msgid "Selecciona una opción"
 msgstr "Select an option"
 
-#: .\templates\core\contacto.html:77
+#: templates/core/contacto.html:63
 msgid "Distribuidor"
 msgstr "Distributor"
 
-#: .\templates\core\contacto.html:78
+#: templates/core/contacto.html:64
 msgid "Alianza B2B"
 msgstr "B2B Partnership"
 
-#: .\templates\core\contacto.html:86
+#: templates/core/contacto.html:70
 msgid "Mensaje"
 msgstr "Message"
 
-#: .\templates\core\contacto.html:89
+#: templates/core/contacto.html:72
 msgid "Cuéntanos lo que necesitas…"
 msgstr "Tell us what you need…"
 
-#: .\templates\core\contacto.html:103
+#: templates/core/contacto.html:77
+msgid "Al enviar se abrirá WhatsApp con tu mensaje listo para enviar."
+msgstr "Submitting opens WhatsApp with your message ready to send."
+
+#: templates/core/contacto.html:79
 msgid "Enviar a WhatsApp"
 msgstr "Send to WhatsApp"
 
-#: .\templates\core\index.html:23
+#: templates/core/index.html:11
+msgid "Bosque de maderas cultivadas en Colombia"
+msgstr "Plantation-grown forest in Colombia"
 
-#| msgid "BurkeExport: calidad colombiana al mundo"
-msgid "Burke Export: CALIDAD colombiana al mundo."
-msgstr "BurkeExport: Colombian quality to the world"
+#: templates/core/index.html:18
+msgid "Exportadores desde Colombia"
+msgstr "Exporters from Colombia"
 
-#: .\templates\core\index.html:27
+#: templates/core/index.html:20
+msgid "Calidad colombiana"
+msgstr "Colombian quality"
 
-#| msgid ""
-#| "Somos una empresa Colombo- Española, con amplia experiencia en "
-#| "comercialización internacional de productos no perecederos, "
-#| "principalmente derivados de maderas cultivavadas (Teca, Melina, Pino, "
-#| "Roble, Árbol de café y cedro), procedentes de bosques legales en "
-#| "distintas regiones de Colombia.."
+#: templates/core/index.html:20
+msgid "para el mundo."
+msgstr "for the world."
+
+#: templates/core/index.html:23
+msgid ""
+"Derivados de maderas cultivadas, café y cacao de la más alta calidad, "
+"procedentes de bosques legales de Colombia."
+msgstr ""
+"Plantation-grown wood products, coffee and cocoa of the highest quality, "
+"sourced from legal forests across Colombia."
+
+#: templates/core/index.html:37
+msgid "Origen"
+msgstr "Origin"
+
+#: templates/core/index.html:38
+msgid "Bosques legales"
+msgstr "Legal forests"
+
+#: templates/core/index.html:41
+#| msgid "Contacto"
+msgid "Control"
+msgstr "Control"
+
+#: templates/core/index.html:42
+msgid "Trazabilidad total"
+msgstr "Full traceability"
+
+#: templates/core/index.html:45
+msgid "Alcance"
+msgstr "Reach"
+
+#: templates/core/index.html:46
+msgid "Cinco continentes"
+msgstr "Five continents"
+
+#: templates/core/index.html:49
+#| msgid "Calidad"
+msgid "Capacidad"
+msgstr "Capacity"
+
+#: templates/core/index.html:50
+msgid "Pedidos escalables"
+msgstr "Scalable orders"
+
+#: templates/core/index.html:59
+msgid "Quiénes somos"
+msgstr "Who we are"
+
+#: templates/core/index.html:60
+msgid "Una compañía colombo-española con visión global."
+msgstr "A Colombian-Spanish company with a global outlook."
+
+#: templates/core/index.html:62
 msgid ""
 "Somos una empresa Colombo-Española con amplia experiencia en "
 "comercialización internacional de productos no perecederos, principalmente "
@@ -130,102 +388,160 @@ msgid ""
 "Cedro), procedentes de bosques legales en distintas regiones de Colombia. "
 "También exportamos café y cacao de la más alta calidad."
 msgstr ""
-"We are a Colombian-Spanish company with extensive experience in the international trade of non-perishable products, primarily cultivated wood derivatives (Teak, Melina, Pine, Oak, Coffee Tree, and Cedar), sourced from legally managed forests across various regions of Colombia. We also export the highest-quality coffee and cocoa"
+"We are a Colombian-Spanish company with extensive experience in the "
+"international trade of non-perishable products, primarily cultivated wood "
+"derivatives (Teak, Melina, Pine, Oak, Coffee Tree, and Cedar), sourced from "
+"legally managed forests across various regions of Colombia. We also export "
+"the highest-quality coffee and cocoa"
 
-#: .\templates\core\index.html:38
-msgid "Ver&nbsp;productos"
-msgstr "View&nbsp;Products"
+#: templates/core/index.html:70
+#| msgid "Nuestra historia"
+msgid "Conoce nuestra historia"
+msgstr "Discover our story"
 
-#: .\templates\core\index.html:42
-msgid "Contáctanos"
-msgstr "Contact Us"
+#: templates/core/index.html:75
+msgid "Módulo prefabricado en madera cultivada"
+msgstr "Prefabricated module in plantation-grown wood"
 
-#: .\templates\core\index.html:52
-msgid "Productos sostenibles"
-msgstr "Sustainable Products"
+#: templates/core/index.html:80
+msgid "Procedencia legal y calidad de exportación en cada producto."
+msgstr "Legal origin and export quality in every product."
 
-#: .\templates\core\index.html:63
+#: templates/core/index.html:89
+#| msgid "Nuestros valores"
+msgid "Nuestro compromiso"
+msgstr "Our commitment"
 
-#| msgid "¿Por qué elegir BurkeExport?"
+#: templates/core/index.html:90
 msgid "¿Por qué elegir Burke Export?"
 msgstr "Why Choose Burke Export?"
 
-#: .\templates\core\index.html:73
+#: templates/core/index.html:95
 msgid "Calidad garantizada"
 msgstr "Guaranteed Quality"
 
-#: .\templates\core\index.html:74
+#: templates/core/index.html:96
 msgid ""
-"Contamos con certificaciones internacionales, trazabilidad de todos nuestros "
-"productos desde el origen, sostenibilidad, calidad y cumplimiento."
+"Contamos con certificaciones internacionales, trazabilidad de todos nuestros"
+" productos desde el origen, sostenibilidad, calidad y cumplimiento."
 msgstr ""
 "We hold international certifications, ensure full traceability of all our "
-"products from origin, and prioritize sustainability, quality, and compliance."
+"products from origin, and prioritize sustainability, quality, and "
+"compliance."
 
-#: .\templates\core\index.html:83
+#: templates/core/index.html:100 templates/core/index.html:201
 msgid "Logística global"
 msgstr "Global logistics"
 
-#: .\templates\core\index.html:84
+#: templates/core/index.html:101 templates/core/index.html:202
 msgid "Entregas puerta a puerta en los cinco continentes."
 msgstr "Door-to-door deliveries across all five continents."
 
-#: .\templates\core\index.html:93
+#: templates/core/index.html:105
 msgid "Escalabilidad"
 msgstr "Scalability"
 
-#: .\templates\core\index.html:94
+#: templates/core/index.html:106
 msgid "Capacidad para crecer junto a tus pedidos."
 msgstr "Capacity to grow alongside your orders."
 
-#: .\templates\core\index.html:102
+#: templates/core/index.html:116
+msgid "Portafolio"
+msgstr "Portfolio"
+
+#: templates/core/index.html:117
 msgid "Nuestras líneas de exportación"
 msgstr "Our export lines"
 
-#: .\templates\core\index.html:111 .\templates\core\productos.html:35
-msgid "Madera"
-msgstr "Wood"
+#: templates/core/index.html:120
+msgid "Ver todo el catálogo"
+msgstr "View the full catalog"
 
-#: .\templates\core\index.html:119 .\templates\core\productos.html:38
-msgid "Café"
-msgstr "Coffee"
+#: templates/core/index.html:127
+msgid "Decks, estructuras y módulos prefabricados."
+msgstr "Decking, structures and prefabricated modules."
 
-#: .\templates\core\index.html:127 .\templates\core\productos.html:42
-msgid "Cacao"
-msgstr "Cocoa"
+#: templates/core/index.html:128
+msgid "Café colombiano de origen."
+msgstr "Single-origin Colombian coffee."
 
-#: .\templates\core\index.html:135 .\templates\core\productos.html:45
-msgid "Otros"
-msgstr "Others"
+#: templates/core/index.html:129
+msgid "Cacao fino de aroma."
+msgstr "Fine flavor cocoa."
 
-#: .\templates\core\index.html:142
+#: templates/core/index.html:130
+msgid "Proyectos y productos a la medida."
+msgstr "Tailor-made projects and products."
+
+#: templates/core/index.html:170
+msgid "Cómo trabajamos"
+msgstr "How we work"
+
+#: templates/core/index.html:171
+msgid "Del origen a tu destino."
+msgstr "From origin to your destination."
+
+#: templates/core/index.html:172
+msgid ""
+"Controlamos cada etapa de la cadena para que recibas un producto confiable, "
+"a tiempo y con la documentación en regla."
+msgstr ""
+"We manage every stage of the supply chain so you receive a reliable product,"
+" on time and with all documentation in order."
+
+#: templates/core/index.html:173
+msgid "Fabricación de módulos en madera"
+msgstr "Manufacturing wooden modules"
+
+#: templates/core/index.html:180
+msgid "Origen legal"
+msgstr "Legal origin"
+
+#: templates/core/index.html:181
+msgid ""
+"Maderas cultivadas en bosques legales de distintas regiones de Colombia."
+msgstr ""
+"Plantation-grown wood from legal forests in different regions of Colombia."
+
+#: templates/core/index.html:187
+msgid "Procesamiento"
+msgstr "Processing"
+
+#: templates/core/index.html:188
+msgid "Altos estándares de procesamiento para cada uno de nuestros productos."
+msgstr "High processing standards for every one of our products."
+
+#: templates/core/index.html:194
+#| msgid "Calidad garantizada"
+msgid "Calidad y trazabilidad"
+msgstr "Quality & traceability"
+
+#: templates/core/index.html:195
+msgid "Seguimiento de cada producto desde el origen hasta el despacho."
+msgstr "Every product is tracked from origin to shipment."
+
+#: templates/core/index.html:213
+#| msgid "Calidad"
+msgid "Actualidad"
+msgstr "Latest"
+
+#: templates/core/index.html:214
 msgid "Última noticia"
 msgstr "Latest news"
 
-#: .\templates\core\index.html:154
+#: templates/core/index.html:217
+msgid "Ver el blog"
+msgstr "Visit the blog"
+
+#: templates/core/index.html:238
 msgid "Aún no hay publicaciones."
 msgstr "No posts yet."
 
-#: .\templates\core\index.html:164
-msgid "¿Listo para llevar tu producto al mundo?"
-msgstr "Ready to take your product to the world?"
-
-#: .\templates\core\index.html:167
-msgid ""
-"Agenda una llamada de 15&nbsp;minutos con nuestro equipo y descubre cómo "
-"podemos ayudarte."
-msgstr ""
-"Schedule a 15-minute call with our team and discover how we can help you."
-
-#: .\templates\core\index.html:174
-msgid "Agenda ahora"
-msgstr "Schedule now"
-
-#: .\templates\core\nosotros.html:16
+#: templates/core/nosotros.html:5
 msgid "El Alma de BurkeExport"
 msgstr "The Soul of BurkeExport"
 
-#: .\templates\core\nosotros.html:19
+#: templates/core/nosotros.html:6
 msgid ""
 "Un equipo multicultural que lleva la esencia de Colombia al mundo, "
 "exportando madera, café y productos de calidad incomparable."
@@ -233,151 +549,160 @@ msgstr ""
 "A multicultural team bringing the essence of Colombia to the world, "
 "exporting wood, coffee, and products of unmatched quality."
 
-#: .\templates\core\nosotros.html:29
+#: templates/core/nosotros.html:12
 msgid "Nuestra historia"
 msgstr "Our Story"
 
-#: .\templates\core\nosotros.html:32
+#: templates/core/nosotros.html:13
+msgid "Conectamos productores colombianos con el mundo."
+msgstr "We connect Colombian producers with the world."
+
+#: templates/core/nosotros.html:15
 msgid ""
 "Nacimos en el corazón del Eje Cafetero en 2010, con la misión de conectar "
-"pequeños productores con grandes mercados globales. Hoy, enviamos más de 400 "
-"contenedores al año a los cinco continentes."
+"pequeños productores con grandes mercados globales. Hoy, enviamos más de 400"
+" contenedores al año a los cinco continentes."
 msgstr ""
 "We were founded in the heart of Colombia’s Coffee Triangle in 2010 with the "
 "mission of connecting small producers to major global markets. Today, we "
 "ship over 400 containers annually to all five continents."
 
-#: .\templates\core\nosotros.html:38
+#: templates/core/nosotros.html:19
 msgid "Países destino"
 msgstr "Destination countries"
 
-#: .\templates\core\nosotros.html:42
+#: templates/core/nosotros.html:23
 msgid "Contenedores/año"
 msgstr "Containers per year"
 
-#: .\templates\core\nosotros.html:46
+#: templates/core/nosotros.html:27
 msgid "Satisfacción"
 msgstr "Satisfaction"
 
-#: .\templates\core\nosotros.html:55
+#: templates/core/nosotros.html:33
 msgid "Equipo exportando"
 msgstr "Export Team"
 
-#: .\templates\core\nosotros.html:66
+#: templates/core/nosotros.html:35
+msgid "Deck en madera cultivada"
+msgstr "Deck in plantation-grown wood"
+
+#: templates/core/nosotros.html:44
+msgid "Lo que nos define"
+msgstr "What defines us"
+
+#: templates/core/nosotros.html:45
 msgid "Nuestros valores"
 msgstr "Our Values"
 
-#: .\templates\core\nosotros.html:76
+#: templates/core/nosotros.html:50
 msgid "Calidad"
 msgstr "Quality"
 
-#: .\templates\core\nosotros.html:78
+#: templates/core/nosotros.html:51
 msgid ""
 "Cada envío cumple estándares internacionales y certificaciones de origen."
-msgstr "Each shipment meets international standards and origin certifications."
+msgstr ""
+"Each shipment meets international standards and origin certifications."
 
-#: .\templates\core\nosotros.html:89
+#: templates/core/nosotros.html:55
 msgid "Integridad"
 msgstr "Integrity"
 
-#: .\templates\core\nosotros.html:91
+#: templates/core/nosotros.html:56
 msgid "Acciones transparentes y comercio justo con productores y clientes."
 msgstr "Transparent actions and fair trade with producers and customers."
 
-#: .\templates\core\nosotros.html:102
+#: templates/core/nosotros.html:60
 msgid "Sostenibilidad"
 msgstr "Sustainability"
 
-#: .\templates\core\nosotros.html:104
+#: templates/core/nosotros.html:61
 msgid "Programas de reforestación y cadena de suministro carbono-neutral."
 msgstr "Reforestation programs and a carbon-neutral supply chain."
 
-#: .\templates\core\nosotros.html:114
+#: templates/core/nosotros.html:70
 msgid "Conoce a nuestro equipo"
 msgstr "Meet Our Team"
 
-#: .\templates\core\nosotros.html:128
-msgid "Pronto conocerás a nuestro equipo."
-msgstr "You’ll soon meet our team."
+#: templates/core/partials/cta.html:7
+msgid "Hablemos"
+msgstr "Let's talk"
 
-#: .\templates\core\nosotros.html:139
-msgid "¿Quieres ser parte de nuestra historia?"
-msgstr "Want to be part of our story?"
+#: templates/core/partials/cta.html:8
+msgid "¿Listo para llevar tu producto al mundo?"
+msgstr "Ready to take your product to the world?"
 
-#: .\templates\core\nosotros.html:142
-msgid ""
-"Contáctanos y descubre cómo BurkeExport puede impulsar tu negocio o tu "
-"carrera."
-msgstr ""
-"Contact us and find out how BurkeExport can boost your business or your "
-"career."
-
-#: .\templates\core\nosotros.html:146
-msgid "Habla con nosotros"
-msgstr "Talk to us"
-
-#: .\templates\core\productos.html:15
-msgid "Descubre nuestra colección"
-msgstr "Discover Our Collection"
-
-#: .\templates\core\productos.html:17
-#, python-format
-msgid ""
-"\n"
-"      <p class=\"mt-6 text-lg text-gray-700 leading-relaxed\">\n"
-"        Todos nuestros productos son calidad de exportación y procedencia "
-"100%% legal. Contamos con altos estándares de procesamiento para cada uno de "
-"nuestros productos.\n"
-"      </p>\n"
-"      "
-msgstr ""
-"\n"
-"      <p class=\"mt-6 text-lg text-gray-700 leading-relaxed\">\n"
-"        All our products are export-quality and 100%% legally sourced. We "
-"maintain the highest processing standards for every item.\n"
-"      </p>\n"
-"      "
-
-#: .\templates\core\productos.html:24
-msgid "Derivados de Madera:"
-msgstr "Wood Derivatives:"
-
-#: .\templates\core\productos.html:27
-msgid "Decks"
-msgstr "Decks"
-
-#: .\templates\core\productos.html:28
-msgid "Estructuras"
-msgstr "Structures"
-
-#: .\templates\core\productos.html:29
-msgid ""
-"Kits Prefabricados (Módulos para casas, cabañas, zonas húmedas y oficinas)"
-msgstr "Prefabricated Kits (Modules for homes, cabins, wet areas, and offices)"
-
-#: .\templates\core\productos.html:55
-msgid "Colección de productos"
-msgstr "Product Showcase"
-
-#: .\templates\core\productos.html:82
-msgid "Lo quiero"
-msgstr "I Want It"
-
-#: .\templates\core\productos.html:99
-msgid "No hay productos en esta categoría."
-msgstr "There are no products in this category."
-
-#: .\templates\core\productos.html:109
-msgid "¿Listo para comenzar?"
-msgstr "Ready to Get Started?"
-
-#: .\templates\core\productos.html:110
-msgid "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas."
-msgstr "Contact us and receive your personalized proposal within 24 hours."
-
-#: .\templates\core\productos.html:112
+#: templates/core/partials/cta.html:11
 msgid "Solicitar propuesta"
 msgstr "Request Proposal"
 
-#~ msgid "Certificaciones internacionales y trazabilidad completa."
-#~ msgstr "International certifications and full traceability."
+#: templates/core/productos.html:5
+msgid "Catálogo"
+msgstr "Catalog"
+
+#: templates/core/productos.html:5
+msgid "Descubre nuestra colección"
+msgstr "Discover Our Collection"
+
+#: templates/core/productos.html:6
+#, python-format
+#| msgid ""
+#| "\n"
+#| "      <p class=\"mt-6 text-lg text-gray-700 leading-relaxed\">\n"
+#| "        Todos nuestros productos son calidad de exportación y procedencia 100%% legal. Contamos con altos estándares de procesamiento para cada uno de nuestros productos.\n"
+#| "      </p>\n"
+#| "      "
+msgid ""
+"Todos nuestros productos son calidad de exportación y procedencia 100%% "
+"legal. Contamos con altos estándares de procesamiento para cada uno de "
+"nuestros productos."
+msgstr ""
+"All our products are export grade and of 100%% legal origin. We apply high "
+"processing standards to every one of our products."
+
+#: templates/core/productos.html:12
+msgid "Derivados de Madera:"
+msgstr "Wood Derivatives:"
+
+#: templates/core/productos.html:14
+msgid "Decks"
+msgstr "Decks"
+
+#: templates/core/productos.html:15
+msgid "Estructuras"
+msgstr "Structures"
+
+#: templates/core/productos.html:16
+msgid ""
+"Kits Prefabricados (Módulos para casas, cabañas, zonas húmedas y oficinas)"
+msgstr ""
+"Prefabricated Kits (Modules for homes, cabins, wet areas, and offices)"
+
+#: templates/core/productos.html:24
+msgid "Categorías"
+msgstr "Categories"
+
+#: templates/core/productos.html:49
+msgid "Hola, me interesa el producto:"
+msgstr "Hello, I'm interested in the product:"
+
+#: templates/core/productos.html:53
+#| msgid "Solicitar propuesta"
+msgid "Solicitar cotización"
+msgstr "Request a quote"
+
+#: templates/core/productos.html:63
+msgid "Catálogo en preparación"
+msgstr "Catalog coming soon"
+
+#: templates/core/productos.html:64
+msgid ""
+"Escríbenos y te compartimos disponibilidad, especificaciones y condiciones "
+"de exportación."
+msgstr ""
+"Write to us and we will share availability, specifications and export terms."
+
+#: templates/core/productos.html:65
+msgid "Solicitar información"
+msgstr "Request information"

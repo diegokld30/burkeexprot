@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /i18n/
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: {{ seo.base }}/sitemap.xml

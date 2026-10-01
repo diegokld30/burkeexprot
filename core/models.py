@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
@@ -33,3 +35,7 @@ class EntradaBlog(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def get_absolute_url(self):
+        # URL legible para SEO: /blog/1/madera-teca/ (en inglés usa el título traducido)
+        return reverse("blog_detalle", args=[self.pk, slugify(self.titulo) or "entrada"])

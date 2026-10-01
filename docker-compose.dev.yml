@@ -1,16 +1,20 @@
-version: '3.9'
-
 services:
   db:
-    image: mariadb:10.9
+    image: mariadb:11.4
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: burkeexport
-      MYSQL_USER: burkeuser
-      MYSQL_PASSWORD: burkeexport123
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Define DB_ROOT_PASSWORD en .env}
+      MARIADB_DATABASE: ${DATABASE_NAME:?Define DATABASE_NAME en .env}
+      MARIADB_USER: ${DATABASE_USER:?Define DATABASE_USER en .env}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD:?Define DATABASE_PASSWORD en .env}
+      MARIADB_AUTO_UPGRADE: "1"
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "--silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
 
   web:
     build:
@@ -20,13 +24,12 @@ services:
     env_file:
       - .env
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     volumes:
       - .:/app  # hot reload
-      - ./media:/app/media
-      - ./staticfiles:/app/staticfiles
 
 volumes:
   db_data:

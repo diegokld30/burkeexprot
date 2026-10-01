@@ -1,0 +1,28 @@
+# Nada de secretos, datos ni historial dentro de la imagen
+.env
+.env.*
+*.sql
+*.sql.gz
+*.sqlite3
+*.dump
+.git
+.gitignore
+
+# Entornos, cachés y artefactos locales
+.venv*
+venv
+__pycache__
+*.py[cod]
+node_modules
+staticfiles
+media
+core/static/css/tailwind.css
+
+# Editor / sistema / docker
+.idea
+.vscode
+.DS_Store
+Dockerfile*
+docker-compose*.yml
+start.sh
+deploy

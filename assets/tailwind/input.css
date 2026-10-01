@@ -1,0 +1,159 @@
+/* Fuente de Tailwind. Compilar con: npm run build:css  (en Docker se compila solo) */
+@import "tailwindcss" source(none);
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+/* Dónde buscar clases */
+@source "../../templates";
+@source "../../core/static/js";
+
+/* ───────── Tipografías (alojadas en /static/fonts, licencia OFL) ───────── */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/static/fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Playfair Display Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/static/fonts/playfair-display-latin-wght-normal.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Playfair Display Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("/static/fonts/playfair-display-latin-wght-italic.woff2") format("woff2-variations");
+}
+
+/* ───────── 🎨 Sistema de diseño – modifica aquí ───────── */
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Playfair Display Variable", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* Azul de marca */
+  --color-brand-50: #eef6f8;
+  --color-brand-100: #d6e9ef;
+  --color-brand-200: #aed2de;
+  --color-brand-300: #82b6c7;
+  --color-brand: #42869c;
+  --color-brand-600: #366f82;
+  --color-brand-700: #2c5a6a;
+
+  /* Petróleo profundo (secciones oscuras, textos) */
+  --color-ink: #0e252b;
+  --color-ink-800: #133038;
+  --color-ink-700: #1b3d46;
+
+  /* Neutros cálidos (sustituyen al blanco puro) */
+  --color-sand: #f6f3ee;
+  --color-sand-200: #ede7dd;
+  --color-line: #e1d9cc;
+
+  /* Acento madera (uso mínimo) */
+  --color-wood: #a8875a;
+  --color-wood-300: #d2b98f;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background-color: var(--color-sand);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-brand-200); color: var(--color-ink); }
+  summary::-webkit-details-marker { display: none; }
+}
+
+/* ───────── Componentes ───────── */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) { padding-inline: 2rem; }
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  &::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  padding: 0.95rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background-color .3s, color .3s, border-color .3s, transform .3s;
+  &:active { transform: scale(0.98); }
+  &:focus-visible { outline: 2px solid var(--color-brand-300); outline-offset: 3px; }
+}
+@utility btn-primary {
+  background: var(--color-brand);
+  color: #fff;
+  &:hover { background: var(--color-brand-600); }
+}
+@utility btn-dark {
+  background: var(--color-ink);
+  color: #fff;
+  &:hover { background: var(--color-ink-700); }
+}
+@utility btn-outline-light {
+  border: 1px solid rgb(255 255 255 / 0.35);
+  color: #fff;
+  &:hover { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.6); }
+}
+@utility btn-outline {
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  &:hover { border-color: var(--color-ink); }
+}
+
+@utility link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  & svg { transition: transform .3s; }
+  &:hover svg { transform: translateX(4px); }
+}
+
+/* Aparición suave al hacer scroll (solo si hay JS y el usuario no pidió menos movimiento) */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .8s cubic-bezier(.2,.65,.3,1), transform .8s cubic-bezier(.2,.65,.3,1);
+  }
+  .js [data-reveal].is-visible { opacity: 1; transform: none; }
+}

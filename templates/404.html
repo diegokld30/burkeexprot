@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% block robots %}noindex, follow{% endblock %}
+{% block content %}
+<section class="container-x flex min-h-[60vh] flex-col items-start justify-center py-24">
+  <p class="eyebrow text-brand">{% trans "Error 404" %}</p>
+  <h1 class="mt-6 max-w-2xl font-serif text-4xl leading-tight md:text-6xl">{% trans "No encontramos esta página." %}</h1>
+  <p class="mt-6 max-w-xl text-lg text-ink/65">{% trans "Es posible que la dirección haya cambiado. Te invitamos a continuar desde aquí:" %}</p>
+  <div class="mt-10 flex flex-wrap gap-4">
+    <a href="{% url 'index' %}" class="btn btn-dark">{% trans "Ir al inicio" %}</a>
+    <a href="{% url 'productos' %}" class="btn btn-outline">{% trans "Ver productos" %}</a>
+  </div>
+</section>
+{% endblock %}

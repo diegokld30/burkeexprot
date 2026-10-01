@@ -1,94 +1,167 @@
-{% load static i18n %}
-<!doctype html>
-<html lang="{{ LANGUAGE_CODE }}" class="scroll-smooth">
+{% load static i18n seo %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{% block title %}Burke Export S.A.S{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title|default:"Burke Export" }}</title>
+  <meta name="description" content="{{ page_description|default:'' }}">
+  <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large{% endblock %}">
+  <link rel="canonical" href="{{ seo.canonical }}">
+  {% with alts=hreflang_alternates|default:seo.alternates %}
+  {% for alt in alts %}<link rel="alternate" hreflang="{{ alt.lang }}" href="{{ alt.url }}">
+  {% endfor %}{% endwith %}<link rel="alternate" hreflang="x-default" href="{{ seo.x_default }}">
 
-  <!-- Tailwind v4 CDN + plugins (forms + typography) -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4?plugins=forms,typography"></script>
+  <!-- Redes sociales (Open Graph / X) -->
+  <meta property="og:site_name" content="Burke Export">
+  <meta property="og:type" content="{{ og_type|default:'website' }}">
+  <meta property="og:title" content="{{ page_title|default:'Burke Export' }}">
+  <meta property="og:description" content="{{ page_description|default:'' }}">
+  <meta property="og:url" content="{{ seo.canonical }}">
+  <meta property="og:image" content="{{ og_image|default:seo.default_image }}">
+  <meta property="og:locale" content="{{ seo.og_locale }}">
+  <meta property="og:locale:alternate" content="{{ seo.og_locale_alt }}">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- 🎨 COLORES CENTRALIZADOS – modifica aquí -->
-  <style>
-    :root{
-      --brand:  #42869C; /* color principal */
-      --madera: #0284c7;
-      --cafe:   #0284c7;
-      --otros:  #0284c7;
-    }
-  </style>
+  <!-- Íconos -->
+  <link rel="icon" href="{% static 'icons/favicon.svg' %}" type="image/svg+xml">
+  <link rel="icon" href="{% static 'icons/favicon-32.png' %}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{% static 'icons/apple-touch-icon.png' %}">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0e252b">
+
+  <link rel="preload" href="{% static 'fonts/inter-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{% static 'fonts/playfair-display-latin-wght-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+  {% block head_extra %}{% endblock %}
+
+  <script type="application/ld+json">{{ seo.organization|jsonld }}</script>
+  <script type="application/ld+json">{{ seo.website|jsonld }}</script>
+  {% if article_ld %}<script type="application/ld+json">{{ article_ld|jsonld }}</script>{% endif %}
 </head>
 
-<body class="font-sans antialiased bg-gray-50 text-gray-800">
+<body class="flex min-h-screen flex-col">
+  <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-white">{% trans "Saltar al contenido" %}</a>
 
-  <!-- ╭──────────────── NAVBAR ───────────────╮ -->
-  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur shadow">
-    <nav class="container mx-auto flex items-center justify-between py-4 px-6">
-      <a href="{% url 'index' %}" class="text-3xl font-extrabold uppercase text-[var(--brand)]">BURKE EXPORT</a>
+  {% with url_name=request.resolver_match.url_name %}
+  <!-- ╭──────────────── CABECERA ───────────────╮ -->
+  <header id="site-header" class="sticky top-0 z-50 border-b border-line/70 bg-sand/85 backdrop-blur-md transition-shadow">
+    <nav class="container-x flex h-20 items-center justify-between gap-6" aria-label="{% trans 'Principal' %}">
+      <a href="{% url 'index' %}" class="group flex items-baseline gap-2" aria-label="Burke Export — {% trans 'Inicio' %}">
+        <span class="font-serif text-[1.65rem] font-semibold tracking-tight text-ink">Burke</span>
+        <span class="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-brand">Export</span>
+      </a>
 
-      <ul class="hidden md:flex gap-6 text-sm font-medium">
-        <li><a href="{% url 'productos' %}" class="hover:text-[var(--brand)]">{% trans 'Productos' %}</a></li>
-        <li><a href="{% url 'nosotros'  %}" class="hover:text-[var(--brand)]">{% trans 'Nosotros'  %}</a></li>
-        <li><a href="{% url 'contacto'  %}" class="hover:text-[var(--brand)]">{% trans 'Contacto'  %}</a></li>
-        <li><a href="{% url 'blog_lista' %}" class="hover:text-[var(--brand)]">{% trans 'Blog' %}</a></li>
+      <ul class="hidden items-center gap-9 text-[0.8rem] font-medium uppercase tracking-[0.14em] lg:flex">
+        <li><a href="{% url 'productos' %}" class="py-2 transition-colors hover:text-brand {% if url_name == 'productos' %}text-brand{% else %}text-ink/70{% endif %}" {% if url_name == 'productos' %}aria-current="page"{% endif %}>{% trans 'Productos' %}</a></li>
+        <li><a href="{% url 'nosotros' %}" class="py-2 transition-colors hover:text-brand {% if url_name == 'nosotros' %}text-brand{% else %}text-ink/70{% endif %}" {% if url_name == 'nosotros' %}aria-current="page"{% endif %}>{% trans 'Nosotros' %}</a></li>
+        <li><a href="{% url 'blog_lista' %}" class="py-2 transition-colors hover:text-brand {% if url_name == 'blog_lista' or url_name == 'blog_detalle' %}text-brand{% else %}text-ink/70{% endif %}" {% if url_name == 'blog_lista' %}aria-current="page"{% endif %}>{% trans 'Blog' %}</a></li>
+        <li><a href="{% url 'contacto' %}" class="py-2 transition-colors hover:text-brand {% if url_name == 'contacto' %}text-brand{% else %}text-ink/70{% endif %}" {% if url_name == 'contacto' %}aria-current="page"{% endif %}>{% trans 'Contacto' %}</a></li>
       </ul>
 
-      <!-- selector de idioma -->
-        <!-- selector de idioma -->
-        <form action="{% url 'set_language' %}" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{{ request.path }}">
-          <select name="language" onchange="this.form.submit()">
-              <option value="es" {% if request.LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
-              <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
-          </select>
-        </form>
+      <div class="flex items-center gap-5">
+        <!-- selector de idioma (enlaces rastreables por Google) -->
+        {% with alts=hreflang_alternates|default:seo.alternates %}
+        <div class="flex items-center gap-1 text-xs font-semibold tracking-[0.14em]" aria-label="{% trans 'Idioma' %}">
+          {% for alt in alts %}
+            {% if not forloop.first %}<span class="text-ink/25" aria-hidden="true">/</span>{% endif %}
+            <a href="{{ alt.path }}" hreflang="{{ alt.lang }}" lang="{{ alt.lang }}" title="{{ alt.name }}"
+               class="px-1 py-1 uppercase transition-colors {% if alt.active %}text-ink{% else %}text-ink/45 hover:text-ink{% endif %}"
+               {% if alt.active %}aria-current="true"{% endif %}>{{ alt.lang }}</a>
+          {% endfor %}
+        </div>
+        {% endwith %}
 
+        <a href="{% url 'contacto' %}" class="btn btn-dark hidden !px-5 !py-2.5 text-[0.8rem] sm:inline-flex">{% trans "Contáctanos" %}</a>
+
+        <!-- menú móvil -->
+        <details class="relative lg:hidden" data-menu>
+          <summary class="flex size-10 cursor-pointer list-none items-center justify-center rounded-full border border-line text-ink transition hover:border-ink" aria-label="{% trans 'Menú' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/>
+            </svg>
+          </summary>
+          <div class="absolute right-0 mt-3 w-64 overflow-hidden rounded-2xl border border-line bg-sand shadow-xl shadow-ink/10">
+            <ul class="py-2 text-sm font-medium">
+              <li><a href="{% url 'productos' %}" class="block px-5 py-3 hover:bg-sand-200">{% trans 'Productos' %}</a></li>
+              <li><a href="{% url 'nosotros' %}" class="block px-5 py-3 hover:bg-sand-200">{% trans 'Nosotros' %}</a></li>
+              <li><a href="{% url 'blog_lista' %}" class="block px-5 py-3 hover:bg-sand-200">{% trans 'Blog' %}</a></li>
+              <li><a href="{% url 'contacto' %}" class="block px-5 py-3 hover:bg-sand-200">{% trans 'Contacto' %}</a></li>
+            </ul>
+            <div class="border-t border-line p-4">
+              <a href="{% url 'contacto' %}" class="btn btn-dark w-full">{% trans "Contáctanos" %}</a>
+            </div>
+          </div>
+        </details>
+      </div>
     </nav>
   </header>
-  <div class="h-16"></div>
   <!-- ╰────────────────────────────────────────╯ -->
+  {% endwith %}
 
-  {% block content %}{% endblock %}
+  <main id="contenido" class="flex-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ╭──────────────── PIE DE PÁGINA ───────────────╮ -->
+  <footer class="bg-ink text-white/70">
+    <div class="container-x grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <a href="{% url 'index' %}" class="flex items-baseline gap-2">
+          <span class="font-serif text-3xl font-semibold tracking-tight text-white">Burke</span>
+          <span class="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-brand-300">Export</span>
+        </a>
+        <p class="mt-6 max-w-sm text-sm leading-relaxed">
+          {% trans "Empresa colombo-española dedicada a la exportación de derivados de maderas cultivadas, café y cacao de la más alta calidad." %}
+        </p>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-white">{% trans "Compañía" %}</h2>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li><a href="{% url 'nosotros' %}" class="transition hover:text-white">{% trans 'Nosotros' %}</a></li>
+          <li><a href="{% url 'productos' %}" class="transition hover:text-white">{% trans 'Productos' %}</a></li>
+          <li><a href="{% url 'blog_lista' %}" class="transition hover:text-white">{% trans 'Blog' %}</a></li>
+          <li><a href="{% url 'contacto' %}" class="transition hover:text-white">{% trans 'Contacto' %}</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-white">{% trans "Líneas" %}</h2>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li><a href="{% url 'productos' %}#panel-madera" class="transition hover:text-white">{% trans 'Madera' %}</a></li>
+          <li><a href="{% url 'productos' %}#panel-cafe" class="transition hover:text-white">{% trans 'Café' %}</a></li>
+          <li><a href="{% url 'productos' %}#panel-cacao" class="transition hover:text-white">{% trans 'Cacao' %}</a></li>
+          <li><a href="{% url 'productos' %}#panel-otros" class="transition hover:text-white">{% trans 'Otros' %}</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-white">{% trans "Contacto" %}</h2>
+        <ul class="mt-6 space-y-3 text-sm">
+          <li><a href="https://wa.me/{{ contact.whatsapp }}" target="_blank" rel="noopener noreferrer" class="transition hover:text-white">WhatsApp · {{ contact.phone_display }}</a></li>
+          <li><a href="mailto:{{ contact.email }}" class="transition hover:text-white">{{ contact.email }}</a></li>
+          <li>Colombia</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="container-x flex flex-col gap-3 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <p>© {% now "Y" %} Burke Export S.A.S. {% trans "Todos los derechos reservados." %}</p>
+        <p>{% trans "Calidad colombiana para el mundo." %}</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- ╭──────────────── BOTÓN WHATSAPP ─────────╮ -->
-  <a href="https://wa.me/573118136992" target="_blank"
-     class="fixed bottom-6 right-6 group size-16 rounded-full grid place-content-center shadow-2xl
-            bg-[var(--brand)] transition-transform hover:scale-110">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-7 h-7 text-white"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-      >
-        <path
-          d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.887 11.893-11.887 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.888-11.893 11.888-1.99-.001-3.951-.5-5.697-1.449L.057 24zm6.597-3.807c1.676.995 3.448 1.591 5.301 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.458-4.417-9.887-9.873-9.889-5.452-.002-9.886 4.433-9.889 9.885-.001 2.225.651 4.3 1.889 6.097l-.999 3.648 3.682-.948zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.298.298-.495.099-.198.05-.372-.025-.521-.074-.148-.669-1.611-.916-2.211-.242-.579-.487-.5-.669-.509l-.571-.01c-.198 0-.52.074-.792.372-.272.298-1.04 1.016-1.04 2.479s1.065 2.876 1.213 3.074c.149.198 2.099 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.005-1.413.248-.694.248-1.288.173-1.413z"
-        />
-      </svg>
+  <a href="https://wa.me/{{ contact.whatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Escríbenos por WhatsApp' %}"
+     class="fixed bottom-6 right-6 z-40 grid size-14 place-content-center rounded-full bg-brand text-white shadow-lg shadow-ink/20 ring-4 ring-sand/70 transition hover:-translate-y-0.5 hover:bg-brand-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.887 11.893-11.887 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.888-11.893 11.888-1.99-.001-3.951-.5-5.697-1.449L.057 24zm6.597-3.807c1.676.995 3.448 1.591 5.301 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.458-4.417-9.887-9.873-9.889-5.452-.002-9.886 4.433-9.889 9.885-.001 2.225.651 4.3 1.889 6.097l-.999 3.648 3.682-.948zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.298.298-.495.099-.198.05-.372-.025-.521-.074-.148-.669-1.611-.916-2.211-.242-.579-.487-.5-.669-.509l-.571-.01c-.198 0-.52.074-.792.372-.272.298-1.04 1.016-1.04 2.479s1.065 2.876 1.213 3.074c.149.198 2.099 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.005-1.413.248-.694.248-1.288.173-1.413z"/>
+    </svg>
   </a>
-  <style>
-    @keyframes ping-slow {0%{opacity:1} 75%,100%{opacity:0}}
-    .group:hover .group-hover\:animate-ping-slow{
-      animation: ping-slow 1.2s cubic-bezier(0,0,.2,1) infinite;
-    }
-  </style>
-  <!-- ╰──────────────────────────────────────────╯ -->
 
-  <!-- ╭──── COLOR PICKER (solo dev) ───╮ -->
-  <div class="fixed bottom-6 left-6 z-50 space-x-3 bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow">
-    <label class="text-sm font-medium">Brand:
-      <input id="brandPicker" type="color" value="#4f46e5" class="align-middle">
-    </label>
-  </div>
-
-  <script>
-    /* Generador de color en vivo */
-    document.getElementById('brandPicker')
-      .addEventListener('input', e =>
-        document.documentElement.style.setProperty('--brand', e.target.value));
-  </script>
-  <!-- ╰──────────────────────────────────╯ -->
-{% block extra_js %}{% endblock %}
+  <script src="{% static 'js/main.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
 </body>
 </html>

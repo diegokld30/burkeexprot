@@ -1,150 +1,84 @@
 {% extends "core/base.html" %}
 {% load i18n static %}
 
-{% block title %}{% trans "Nosotros" %}{% endblock %}
-
 {% block content %}
-{# ░░░ HERO: QUIÉNES SOMOS ░░░ ------------------------------------------- #}
-<section class="relative overflow-hidden bg-white pt-24 lg:pt-32">
-  <img src="{% static 'img/casa-madera.png' %}"
-       alt=""
-       class="absolute inset-0 h-full w-full object-cover object-center opacity-25" />
-  <div class="absolute inset-0 bg-gradient-to-b from-white/70 to-white"></div>
+{% trans "Nosotros" as eyebrow %}{% trans "El Alma de BurkeExport" as title %}
+{% trans "Un equipo multicultural que lleva la esencia de Colombia al mundo, exportando madera, café y productos de calidad incomparable." as subtitle %}
+{% include "core/partials/page_header.html" with eyebrow=eyebrow title=title subtitle=subtitle image="img/opt/hero-bosque.webp" %}
 
-  <div class="container relative z-10 mx-auto px-6 text-center">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--brand)]">
-      {% trans "El Alma de BurkeExport" %}
-    </h1>
-    <p class="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-gray-700">
-      {% trans "Un equipo multicultural que lleva la esencia de Colombia al mundo, exportando madera, café y productos de calidad incomparable." %}
+{# ░░░ HISTORIA ░░░ --------------------------------------------------------- #}
+<section class="container-x grid items-center gap-14 py-24 md:py-32 lg:grid-cols-12 lg:gap-20">
+  <div class="lg:col-span-6" data-reveal>
+    <p class="eyebrow text-brand">{% trans "Nuestra historia" %}</p>
+    <h2 class="mt-6 font-serif text-3xl leading-tight md:text-5xl">{% trans "Conectamos productores colombianos con el mundo." %}</h2>
+    <p class="mt-8 text-lg leading-relaxed text-ink/70">
+      {% trans "Nacimos en el corazón del Eje Cafetero en 2010, con la misión de conectar pequeños productores con grandes mercados globales. Hoy, enviamos más de 400 contenedores al año a los cinco continentes." %}
     </p>
+    <dl class="mt-12 grid grid-cols-3 divide-x divide-line border-y border-line">
+      <div class="flex flex-col py-6 pr-4">
+        <dt class="text-xs text-ink/55">{% trans "Países destino" %}</dt>
+        <dd class="order-first font-serif text-4xl text-ink md:text-5xl">15+</dd>
+      </div>
+      <div class="flex flex-col px-4 py-6 md:px-6">
+        <dt class="text-xs text-ink/55">{% trans "Contenedores/año" %}</dt>
+        <dd class="order-first font-serif text-4xl text-ink md:text-5xl">400</dd>
+      </div>
+      <div class="flex flex-col py-6 pl-4 md:pl-6">
+        <dt class="text-xs text-ink/55">{% trans "Satisfacción" %}</dt>
+        <dd class="order-first font-serif text-4xl text-ink md:text-5xl">98%</dd>
+      </div>
+    </dl>
+  </div>
+  <div class="grid grid-cols-2 gap-5 lg:col-span-6" data-reveal>
+    <img src="{% static 'img/opt/taller.webp' %}" alt="{% trans 'Equipo exportando' %}" width="1100" height="1375" loading="lazy" decoding="async"
+         class="aspect-[3/4] w-full rounded-[1.5rem] object-cover">
+    <img src="{% static 'img/opt/deck.webp' %}" alt="{% trans 'Deck en madera cultivada' %}" width="780" height="1040" loading="lazy" decoding="async"
+         class="mt-16 aspect-[3/4] w-full rounded-[1.5rem] object-cover">
   </div>
 </section>
 
-{# ░░░ HISTORIA & PROPÓSITO ░░░ ------------------------------------------ #}
-<section class="container mx-auto px-6 py-24">
-  <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-    <div>
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-        {% trans "Nuestra historia" %}
-      </h2>
-      <p class="text-gray-600 leading-relaxed space-y-4">
-        {% trans "Nacimos en el corazón del Eje Cafetero en 2010, con la misión de conectar pequeños productores con grandes mercados globales. Hoy, enviamos más de 400 contenedores al año a los cinco continentes." %}
-      </p>
-
-      <div class="mt-10 grid grid-cols-3 gap-6 text-center">
-        <div>
-          <p class="text-4xl font-black text-[var(--brand)]">15+</p>
-          <p class="text-sm text-gray-600">{% trans "Países destino" %}</p>
-        </div>
-        <div>
-          <p class="text-4xl font-black text-[var(--brand)]">400</p>
-          <p class="text-sm text-gray-600">{% trans "Contenedores/año" %}</p>
-        </div>
-        <div>
-          <p class="text-4xl font-black text-[var(--brand)]">98%</p>
-          <p class="text-sm text-gray-600">{% trans "Satisfacción" %}</p>
-        </div>
-      </div>
+{# ░░░ VALORES ░░░ ---------------------------------------------------------- #}
+<section class="bg-ink text-white">
+  <div class="container-x py-24 md:py-32">
+    <div class="max-w-2xl" data-reveal>
+      <p class="eyebrow text-wood-300">{% trans "Lo que nos define" %}</p>
+      <h2 class="mt-6 font-serif text-3xl leading-tight md:text-5xl">{% trans "Nuestros valores" %}</h2>
     </div>
-
-    <div class="flex justify-center lg:justify-end">
-      <div class="relative size-80 md:size-[28rem]">
-        <div class="absolute inset-0 rounded-3xl bg-[var(--brand)]/10"></div>
-        <img src="{% static 'img/379425CB-003E-4E91-97E2-A1F3E8095500.JPG' %}"
-             alt="{% trans 'Equipo exportando' %}"
-             class="relative z-10 h-full w-full rounded-3xl object-cover shadow-xl ring-4 ring-white">
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ░░░ VALORES ░░░ -------------------------------------------------------- #}
-<section class="bg-gray-50 py-24">
-  <div class="container mx-auto px-6">
-    <h2 class="text-center text-3xl md:text-4xl font-bold mb-14">
-      {% trans "Nuestros valores" %}
-    </h2>
-
-    <div class="grid gap-12 md:grid-cols-3">
-      <div class="text-center space-y-4">
-        <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold">{% trans "Calidad" %}</h3>
-        <p class="text-sm text-gray-600">
-          {% trans "Cada envío cumple estándares internacionales y certificaciones de origen." %}
-        </p>
-      </div>
-
-      <div class="text-center space-y-4">
-        <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-amber-500/10 text-amber-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 8c-4.418 0-8 1.79-8 4s3.582 4 8 4 8-1.79 8-4-3.582-4-8-4z" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold">{% trans "Integridad" %}</h3>
-        <p class="text-sm text-gray-600">
-          {% trans "Acciones transparentes y comercio justo con productores y clientes." %}
-        </p>
-      </div>
-
-      <div class="text-center space-y-4">
-        <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-cyan-500/10 text-cyan-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 17v-2a4 4 0 118 0v2m-3-8h.01" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold">{% trans "Sostenibilidad" %}</h3>
-        <p class="text-sm text-gray-600">
-          {% trans "Programas de reforestación y cadena de suministro carbono-neutral." %}
-        </p>
-      </div>
+    <div class="mt-16 grid gap-12 md:grid-cols-3 md:gap-10">
+      <article class="border-t border-white/20 pt-8" data-reveal>
+        <span class="font-serif text-sm italic text-brand-300">01</span>
+        <h3 class="mt-4 font-serif text-2xl">{% trans "Calidad" %}</h3>
+        <p class="mt-4 leading-relaxed text-white/65">{% trans "Cada envío cumple estándares internacionales y certificaciones de origen." %}</p>
+      </article>
+      <article class="border-t border-white/20 pt-8" data-reveal>
+        <span class="font-serif text-sm italic text-brand-300">02</span>
+        <h3 class="mt-4 font-serif text-2xl">{% trans "Integridad" %}</h3>
+        <p class="mt-4 leading-relaxed text-white/65">{% trans "Acciones transparentes y comercio justo con productores y clientes." %}</p>
+      </article>
+      <article class="border-t border-white/20 pt-8" data-reveal>
+        <span class="font-serif text-sm italic text-brand-300">03</span>
+        <h3 class="mt-4 font-serif text-2xl">{% trans "Sostenibilidad" %}</h3>
+        <p class="mt-4 leading-relaxed text-white/65">{% trans "Programas de reforestación y cadena de suministro carbono-neutral." %}</p>
+      </article>
     </div>
   </div>
 </section>
 
-{# ░░░ EQUIPO ░░░ --------------------------------------------------------- #}
-<section class="container mx-auto px-6 py-24">
-  <h2 class="text-center text-3xl md:text-4xl font-bold mb-14">
-    {% trans "Conoce a nuestro equipo" %}
-  </h2>
-
-  <div class="grid gap-12 md:grid-cols-3 lg:grid-cols-4">
+{% if team %}
+{# ░░░ EQUIPO ░░░ ----------------------------------------------------------- #}
+<section class="container-x py-24 md:py-32">
+  <h2 class="font-serif text-3xl md:text-5xl">{% trans "Conoce a nuestro equipo" %}</h2>
+  <div class="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
     {% for person in team %}
-      <div class="group text-center">
-        <div class="mx-auto size-40 overflow-hidden rounded-full shadow-lg ring-4 ring-[var(--brand)]/20">
-          <img src="{{ person.foto.url }}" alt="{{ person.nombre }}" class="h-full w-full object-cover group-hover:scale-105 transition">
-        </div>
-        <h3 class="mt-6 text-lg font-semibold text-gray-800">{{ person.nombre }}</h3>
-        <p class="text-sm text-[var(--brand)] font-medium">{{ person.cargo }}</p>
-        <p class="mt-2 text-sm text-gray-600 line-clamp-4">{{ person.bio }}</p>
+      <div>
+        <img src="{{ person.foto.url }}" alt="{{ person.nombre }}" loading="lazy" class="aspect-[4/5] w-full rounded-[1.5rem] object-cover">
+        <h3 class="mt-6 font-serif text-xl">{{ person.nombre }}</h3>
+        <p class="text-sm text-brand">{{ person.cargo }}</p>
       </div>
-    {% empty %}
-      <p class="col-span-full text-center text-gray-500">{% trans "Pronto conocerás a nuestro equipo." %}</p>
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
-{# ░░░ CTA FINAL ░░░ ------------------------------------------------------ #}
-<section class="relative overflow-hidden bg-[var(--brand)] py-20 text-white">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(#ffffff11_1px,transparent_1px)] [background-size:36px_36px]"></div>
-
-  <div class="container mx-auto px-6 text-center">
-    <h3 class="text-3xl md:text-4xl font-bold mb-4">
-      {% trans "¿Quieres ser parte de nuestra historia?" %}
-    </h3>
-    <p class="mx-auto max-w-2xl mb-8 text-gray-100">
-      {% trans "Contáctanos y descubre cómo BurkeExport puede impulsar tu negocio o tu carrera." %}
-    </p>
-    <a href="{% url 'contacto' %}"
-       class="inline-block rounded-full bg-white px-10 py-4 font-semibold text-[var(--brand)] shadow hover:opacity-90 transition">
-      {% trans "Habla con nosotros" %}
-    </a>
-  </div>
-</section>
+{% include "core/partials/cta.html" %}
 {% endblock %}

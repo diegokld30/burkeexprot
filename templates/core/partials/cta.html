@@ -1,0 +1,16 @@
+{% load i18n %}
+<section class="bg-sand-200/60">
+  <div class="container-x py-24 md:py-28">
+    <div class="relative overflow-hidden rounded-[2rem] bg-ink px-8 py-16 text-center text-white md:px-16 md:py-20" data-reveal>
+      <div class="absolute -right-24 -top-24 size-80 rounded-full bg-brand/20 blur-3xl" aria-hidden="true"></div>
+      <div class="absolute -bottom-32 -left-20 size-80 rounded-full bg-wood/15 blur-3xl" aria-hidden="true"></div>
+      <p class="eyebrow relative text-wood-300 justify-center">{% trans "Hablemos" %}</p>
+      <h2 class="relative mx-auto mt-6 max-w-3xl font-serif text-3xl leading-tight md:text-5xl">{% trans "¿Listo para llevar tu producto al mundo?" %}</h2>
+      <p class="relative mx-auto mt-6 max-w-xl text-white/70">{% trans "Contáctanos y recibe tu propuesta personalizada en menos de 24 horas." %}</p>
+      <div class="relative mt-10 flex flex-wrap justify-center gap-4">
+        <a href="{% url 'contacto' %}" class="btn btn-primary">{% trans "Solicitar propuesta" %}</a>
+        <a href="https://wa.me/{{ contact.whatsapp }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>

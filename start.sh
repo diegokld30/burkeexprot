@@ -1,81 +1,59 @@
 #!/bin/bash
+set -euo pipefail
 
-ENVIRONMENT=$1
+ENVIRONMENT=${1:-}
 
 if [ -z "$ENVIRONMENT" ]; then
   echo "❌ Debes especificar el entorno: dev o prod"
   exit 1
 fi
 
-function wait_for_db() {
-  echo "⏳ Esperando a que la base de datos esté disponible..."
-  until docker exec "$1" mariadb -u root -p"rootpassword" -e "SELECT 1" &> /dev/null; do
-    sleep 2
-  done
-  echo "✅ Base de datos lista."
-}
+if [ ! -f .env ]; then
+  echo "❌ Falta el archivo .env (copia .env.example y complétalo)"
+  exit 1
+fi
 
-function get_container() {
-  docker-compose -f "$1" ps -q "$2"
-}
+# Docker Compose v2 ("docker compose") o v1 ("docker-compose")
+if docker compose version &> /dev/null; then DC="docker compose"; else DC="docker-compose"; fi
 
 if [ "$ENVIRONMENT" = "dev" ]; then
+  FILE=docker-compose.dev.yml
   echo "🚧 Levantando entorno de DESARROLLO..."
-  docker-compose -f docker-compose.dev.yml up -d --build
-
-  sleep 3
-  DB_CONTAINER=$(get_container docker-compose.dev.yml db)
-  WEB_CONTAINER=$(get_container docker-compose.dev.yml web)
-
-  if [ -z "$DB_CONTAINER" ] || [ -z "$WEB_CONTAINER" ]; then
-    echo "❌ No se encontraron los contenedores."
-    docker ps -a
-    exit 1
-  fi
-
-  wait_for_db "$DB_CONTAINER"
+  $DC -f $FILE up -d --build --wait
 
   echo "🛠️ Aplicando migraciones..."
-  docker exec "$WEB_CONTAINER" python manage.py migrate
+  $DC -f $FILE exec web python manage.py migrate
 
-  echo "📂 Verifica si necesitas crear un superusuario:"
-  echo "docker exec $WEB_CONTAINER python manage.py createsuperuser"
+  echo "📂 Para crear un superusuario:"
+  echo "$DC -f $FILE exec web python manage.py createsuperuser"
+  echo "🎨 CSS: ejecuta 'npm run watch:css' en otra terminal"
 
-  echo "🌐 Abriendo navegador en http://127.0.0.1:8000"
-  if command -v xdg-open &> /dev/null; then
-    xdg-open http://127.0.0.1:8000
-  elif command -v open &> /dev/null; then
-    open http://127.0.0.1:8000
-  fi
-
+  echo "🌐 http://127.0.0.1:8000"
   echo "📜 Logs en tiempo real (Ctrl+C para salir)"
-  docker-compose -f docker-compose.dev.yml logs -f web
+  $DC -f $FILE logs -f web
 
 elif [ "$ENVIRONMENT" = "prod" ]; then
-  echo "🚀 Levantando entorno de PRODUCCIÓN..."
-  docker-compose -f docker-compose.yml up -d --build
+  FILE=docker-compose.yml
+  WEB_PORT=$(grep -E "^WEB_PORT=" .env | cut -d= -f2 || true)
+  echo "🚀 Construyendo imagen de PRODUCCIÓN (con parches de seguridad al día)..."
+  $DC -f $FILE build --pull
 
-  sleep 3
-  DB_CONTAINER=$(get_container docker-compose.yml db)
-  WEB_CONTAINER=$(get_container docker-compose.yml web)
+  echo "🔐 Ajustando permisos de media/ para el usuario sin privilegios..."
+  mkdir -p media
+  $DC -f $FILE run --rm --no-deps --user root --entrypoint chown web -R 10001:10001 /app/media
 
-  if [ -z "$DB_CONTAINER" ] || [ -z "$WEB_CONTAINER" ]; then
-    echo "❌ No se encontraron los contenedores."
-    docker ps -a
-    exit 1
-  fi
-
-  wait_for_db "$DB_CONTAINER"
+  echo "⏳ Levantando servicios..."
+  $DC -f $FILE up -d --wait
 
   echo "🛠️ Aplicando migraciones..."
-  docker exec "$WEB_CONTAINER" python manage.py migrate
+  $DC -f $FILE exec web python manage.py migrate --noinput
 
-  echo "📦 Recolectando archivos estáticos..."
-  docker exec "$WEB_CONTAINER" python manage.py collectstatic --noinput
+  echo "🔎 Verificación de seguridad de Django..."
+  $DC -f $FILE exec web python manage.py check --deploy
 
-  echo "🌐 Producción disponible en http://127.0.0.1:8001"
+  echo "🌐 Producción disponible en http://127.0.0.1:${WEB_PORT:-8001} (detrás de nginx)"
   echo "📜 Logs en tiempo real (Ctrl+C para salir)"
-  docker-compose -f docker-compose.yml logs -f web
+  $DC -f $FILE logs -f web
 
 else
   echo "❌ Entorno no reconocido. Usa 'dev' o 'prod'"

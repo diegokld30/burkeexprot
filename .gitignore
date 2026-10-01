@@ -1,1 +1,27 @@
-/node_modules
+# Secretos y datos (NUNCA versionar)
+.env
+.env.*
+!.env.example
+*.sql
+*.sql.gz
+*.sqlite3
+*.dump
+
+burkeexport-2026-10-01.sql
+/burkeexport-2026-10-01.sql
+
+# Entornos y cachés de Python
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+
+# Generados en el build
+/staticfiles/
+/node_modules/
+/core/static/css/tailwind.css
+
+# Editor / sistema
+.idea/
+.vscode/
+.DS_Store

@@ -6,20 +6,15 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 RUN apt-get update \
- && apt-get install -y \
-      build-essential \
-      default-libmysqlclient-dev \
-      pkg-config \
-      python3-dev \
-    --no-install-recommends \
+ && apt-get install -y --no-install-recommends build-essential default-libmysqlclient-dev pkg-config gettext \
  && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
- && pip install --no-cache-dir mysqlclient
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 EXPOSE 8000
 
+# CSS: en tu máquina ejecuta `npm run watch:css` mientras desarrollas
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
